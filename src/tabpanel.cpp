@@ -29,6 +29,9 @@ TabPanel::TabPanel(QWidget *parent, QFile *file) :
     connect(textpanel->verticalScrollBar(), SIGNAL(valueChanged(int)), hexpanel->verticalScrollBar(), SLOT(setValue(int)));
     hexpanel->formatColumns();
     textpanel->formatColumns();
+
+//    TODO: set hexpanel and textpanel size (horizontal)
+
 }
 
 TabPanel::~TabPanel()

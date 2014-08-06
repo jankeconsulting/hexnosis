@@ -16,7 +16,6 @@ QString HexPanelItemDelegate::displayText(const QVariant &value, const QLocale &
 {
     Q_UNUSED(locale);
     return toHex(value);
-
 }
 
 QWidget *HexPanelItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const

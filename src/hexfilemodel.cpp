@@ -33,7 +33,6 @@ int HexFileModel::rowCount(const QModelIndex & /* parent */) const
 int HexFileModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-//    TODO: store count in class variable
 //    if(parent.row() < rowCount())
         return tablewidth;
 //    else
@@ -86,6 +85,14 @@ QVariant HexFileModel::headerData(int section, Qt::Orientation orientation, int 
 //    TODO: Implement this
 //    if (role == Qt::SizeHintRole)
 //        return QSize(1, 1);
+    if (role == Qt::DisplayRole) {
+        if(orientation == Qt::Horizontal) {
+            return QString("%1").arg(QByteArray(1, section).toHex().toUpper().data()[1]);
+        }
+        if(orientation == Qt::Vertical) {
+            return QString("%1h").arg(QByteArray(3, 0).setNum(section * tablewidth, 16).toUpper().data());
+        }
+    }
     return QVariant();
 }
 
