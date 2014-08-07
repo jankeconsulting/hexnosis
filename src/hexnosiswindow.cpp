@@ -30,11 +30,6 @@ HexnosisWindow::~HexnosisWindow()
     delete ui;
 }
 
-void HexnosisWindow::on_actionRow_Shading_toggled(bool state)
-{
-    tab->setAlternatingRowColors(state);
-}
-
 void HexnosisWindow::closeTab(int index)
 {
     delete tab->widget(index);
@@ -105,13 +100,13 @@ void HexnosisWindow::setIconFallbacks()
 void HexnosisWindow::on_actionNew_triggered()
 {
     tab->createFile();
-    on_actionRow_Shading_toggled(rowShadingState());
+    resetToggles();
 }
 
 void HexnosisWindow::on_actionOpen_triggered()
 {
     tab->openFile();
-    on_actionRow_Shading_toggled(rowShadingState());
+    resetToggles();
 }
 
 void HexnosisWindow::on_actionClose_triggered()
@@ -140,7 +135,37 @@ void HexnosisWindow::on_actionAboutQt_triggered()
 }
 
 bool HexnosisWindow::rowShadingState() {
-    return ui->actionRow_Shading->isChecked();
+    return ui->actionRowShading->isChecked();
 }
 
+bool HexnosisWindow::hexPanelVisibility()
+{
+    return ui->actionHexDisplay->isChecked();
+}
 
+bool HexnosisWindow::textPanelVisibility()
+{
+    return ui->actionCharDisplay->isChecked();
+}
+
+void HexnosisWindow::resetToggles()
+{
+    on_actionRowShading_toggled(rowShadingState());
+    on_actionHexDisplay_toggled(hexPanelVisibility());
+    on_actionCharDisplay_toggled(textPanelVisibility());
+}
+
+void HexnosisWindow::on_actionRowShading_toggled(bool state)
+{
+    tab->setAlternatingRowColors(state);
+}
+
+void HexnosisWindow::on_actionHexDisplay_toggled(bool state)
+{
+    tab->setHexPanelVisibility(state);
+}
+
+void HexnosisWindow::on_actionCharDisplay_toggled(bool state)
+{
+    tab->setTextPanelVisibility(state);
+}

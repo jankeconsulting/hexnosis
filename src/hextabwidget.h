@@ -31,7 +31,10 @@ public:
     void openFile();
     void saveFile();
     void saveFileAs();
+
     void setAlternatingRowColors(bool state);
+    void setHexPanelVisibility(bool state);
+    void setTextPanelVisibility(bool state);
 
 signals:
 

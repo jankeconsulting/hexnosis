@@ -65,6 +65,22 @@ void HexTabWidget::setAlternatingRowColors(bool state)
     }
 }
 
+void HexTabWidget::setHexPanelVisibility(bool state)
+{
+    for (int i = 0; i < count(); i++) {
+        QWidget* w = widget(i);
+        qobject_cast<TabPanel *>(w)->setHexPanelVisibility(state);
+    }
+}
+
+void HexTabWidget::setTextPanelVisibility(bool state)
+{
+    for (int i = 0; i < count(); i++) {
+        QWidget* w = widget(i);
+        qobject_cast<TabPanel *>(w)->setTextPanelVisibility(state);
+    }
+}
+
 bool HexTabWidget::chooseFile()
 {
 //    TODO: possibly refactor file parts to model (or own file class) - keep UI part in this class

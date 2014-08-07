@@ -28,7 +28,8 @@ public:
     void createFile(int len, char fillchar);
     bool saveFile(QString filename);
     void setAlternatingRowColors(bool state);
-
+    void setHexPanelVisibility(bool state);
+    void setTextPanelVisibility(bool state);
     // QProperty Getters and Setters
 
     void setModel(HexFileModel *model);

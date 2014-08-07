@@ -30,12 +30,19 @@ private slots:
     void on_actionSave_triggered();
     void on_actionSaveAs_triggered();
     void on_actionClose_triggered();
-    void on_actionRow_Shading_toggled(bool state);
     void on_actionAbout_triggered();
     void on_actionAboutQt_triggered();
+
     void closeTab(int index);
     void currentTabChanged(int index);
     bool rowShadingState();
+    bool hexPanelVisibility();
+    bool textPanelVisibility();
+
+    void resetToggles();
+    void on_actionRowShading_toggled(bool state);
+    void on_actionHexDisplay_toggled(bool state);
+    void on_actionCharDisplay_toggled(bool state);
 
 private:
     Ui::HexnosisWindow *ui;

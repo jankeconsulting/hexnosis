@@ -59,6 +59,21 @@ void TabPanel::setAlternatingRowColors(bool state)
     textPanel()->setAlternatingRowColors(state);
 }
 
+void TabPanel::setHexPanelVisibility(bool state)
+{
+    hexPanel()->setVisible(state);
+}
+
+void TabPanel::setTextPanelVisibility(bool state)
+{
+    textPanel()->setVisible(state);
+    if(state)
+        hexPanel()->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    else
+        hexPanel()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    hexPanel()->calculateMinimumWidth();
+}
+
 void TabPanel::setModel(HexFileModel *model) {
     m_model = model;
 }
