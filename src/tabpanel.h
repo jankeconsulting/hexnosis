@@ -17,9 +17,9 @@
 class TabPanel : public QWidget
 {
     Q_OBJECT
-//    TODO: Investigate advantages of using Q_PROPERTY macro
     Q_PROPERTY(HexFileModel *model READ model WRITE setModel)
-    Q_PROPERTY(HexPanel *hexpanel READ getHexPanel WRITE setHexPanel)
+    Q_PROPERTY(HexPanel *hexpanel READ hexPanel WRITE setHexPanel)
+    Q_PROPERTY(TextPanel *textpanel READ textPanel WRITE setTextPanel)
 
 public:
     explicit TabPanel(QWidget *parent = 0, QFile *file = 0);
@@ -29,30 +29,22 @@ public:
     bool saveFile(QString filename);
     void setAlternatingRowColors(bool state);
 
-    void setModel(HexFileModel *model) {
-        m_model = model;
-    }
+    // QProperty Getters and Setters
 
-    HexFileModel *model() {
-        return m_model;
-    }
-
-    void setHexPanel(HexPanel *panel) {
-        hexpanel = panel;
-    }
-
-    HexPanel *getHexPanel() {
-        return hexpanel;
-    }
+    void setModel(HexFileModel *model);
+    HexFileModel *model();
+    void setHexPanel(HexPanel *panel);
+    HexPanel *hexPanel();
+    void setTextPanel(TextPanel *panel);
+    TextPanel *textPanel();
 
 signals:
 
 public slots:
 
 private:
-    HexPanel *hexpanel;
-    TextPanel *textpanel;
-    QHBoxLayout *layout;
+    HexPanel *m_hexpanel;
+    TextPanel *m_textpanel;
     HexFileModel *m_model;
 };
 

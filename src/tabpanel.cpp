@@ -11,9 +11,11 @@ TabPanel::TabPanel(QWidget *parent, QFile *file) :
     QWidget(parent)
 {
     setModel(new HexFileModel(this, file));
-    hexpanel = new HexPanel(this);
-    textpanel = new TextPanel(this);
-    layout = new QHBoxLayout;
+    HexPanel *hexpanel = new HexPanel(this);
+    setHexPanel(hexpanel);
+    TextPanel *textpanel = new TextPanel(this);
+    setTextPanel(textpanel);
+    QHBoxLayout *layout = new QHBoxLayout;
     layout->addWidget(hexpanel);
     layout->addWidget(textpanel);
     layout->addStretch();
@@ -36,9 +38,9 @@ TabPanel::TabPanel(QWidget *parent, QFile *file) :
 TabPanel::~TabPanel()
 {
     delete model();
-    delete hexpanel;
-    delete textpanel;
-    delete layout;
+    delete hexPanel();
+    delete textPanel();
+    delete layout();
 }
 
 void TabPanel::createFile(int len, char fillchar)
@@ -53,6 +55,30 @@ bool TabPanel::saveFile(QString filename)
 
 void TabPanel::setAlternatingRowColors(bool state)
 {
-    hexpanel->setAlternatingRowColors(state);
-    textpanel->setAlternatingRowColors(state);
+    hexPanel()->setAlternatingRowColors(state);
+    textPanel()->setAlternatingRowColors(state);
+}
+
+void TabPanel::setModel(HexFileModel *model) {
+    m_model = model;
+}
+
+HexFileModel *TabPanel::model() {
+    return m_model;
+}
+
+void TabPanel::setHexPanel(HexPanel *panel) {
+    m_hexpanel = panel;
+}
+
+HexPanel *TabPanel::hexPanel() {
+    return m_hexpanel;
+}
+
+void TabPanel::setTextPanel(TextPanel *panel) {
+    m_textpanel = panel;
+}
+
+TextPanel *TabPanel::textPanel() {
+    return m_textpanel;
 }
