@@ -59,7 +59,6 @@ void HexnosisWindow::currentTabChanged(int index)
 
 void HexnosisWindow::enableActions(bool enable)
 {
-//    TODO: save needs to be disabled when tab has no filename
     ui->actionClose->setEnabled(enable);
     ui->actionSave->setEnabled(enable);
     ui->actionSaveAs->setEnabled(enable);

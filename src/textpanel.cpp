@@ -43,5 +43,5 @@ void TextPanel::calculateMinimumWidth()
     for(int i = 0; i< model()->columnCount(); i++) {
         column_width += columnWidth(i);
     }
-    setMinimumWidth(verticalHeader()->width() + column_width + frameWidth() + verticalScrollBar()->sizeHint().width());
+    setMinimumWidth(verticalHeader()->width() + column_width + frameWidth()*2 + verticalScrollBar()->sizeHint().width());
 }
