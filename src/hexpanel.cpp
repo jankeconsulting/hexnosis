@@ -12,7 +12,7 @@ HexPanel::HexPanel(QWidget *parent) :
 {
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
     HexPanelItemDelegate *delegate = new HexPanelItemDelegate();
-    setItemDelegate(static_cast<QAbstractItemDelegate *>(delegate));
+    setItemDelegate(qobject_cast<QAbstractItemDelegate *>(delegate));
     formatPanel();
 //    setMouseTracking(true);
 //    viewport()->setMouseTracking(true);

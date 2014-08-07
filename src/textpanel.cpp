@@ -12,7 +12,7 @@ TextPanel::TextPanel(QWidget *parent) :
 {
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
     TextPanelItemDelegate *delegate = new TextPanelItemDelegate();
-    setItemDelegate(static_cast<QAbstractItemDelegate *>(delegate));
+    setItemDelegate(qobject_cast<QAbstractItemDelegate *>(delegate));
     formatPanel();
 }
 

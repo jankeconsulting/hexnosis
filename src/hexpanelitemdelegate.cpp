@@ -32,13 +32,13 @@ QWidget *HexPanelItemDelegate::createEditor(QWidget *parent, const QStyleOptionV
 
 void HexPanelItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    QLineEdit *lineeditor = static_cast<QLineEdit *>(editor);
+    QLineEdit *lineeditor = qobject_cast<QLineEdit *>(editor);
     lineeditor->setText(toHex(index.model()->data(index, Qt::EditRole)));
 }
 
 void HexPanelItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
-    QLineEdit *lineeditor = static_cast<QLineEdit *>(editor);
+    QLineEdit *lineeditor = qobject_cast<QLineEdit *>(editor);
     model->setData(index, QByteArray::fromHex(lineeditor->text().toLatin1()), Qt::EditRole);
 }
 

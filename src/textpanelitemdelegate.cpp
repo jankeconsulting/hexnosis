@@ -31,13 +31,13 @@ QWidget *TextPanelItemDelegate::createEditor(QWidget *parent, const QStyleOption
 
 void TextPanelItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    QLineEdit *lineeditor = static_cast<QLineEdit *>(editor);
+    QLineEdit *lineeditor = qobject_cast<QLineEdit *>(editor);
     lineeditor->setText(toText(index.model()->data(index, Qt::EditRole)));
 }
 
 void TextPanelItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
-    QLineEdit *lineeditor = static_cast<QLineEdit *>(editor);
+    QLineEdit *lineeditor = qobject_cast<QLineEdit *>(editor);
     model->setData(index, lineeditor->text().toLatin1(), Qt::EditRole);
 }
 
