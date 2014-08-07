@@ -28,11 +28,11 @@ TabPanel::TabPanel(QWidget *parent, QFile *file) :
     hexpanel->setModel(model());
     textpanel->setModel(model());
 
-    hexpanel->calculateMinimumWidth();
-    textpanel->calculateMinimumWidth();
-
     textpanel->setSelectionModel(hexpanel->selectionModel());
     connect(textpanel->verticalScrollBar(), SIGNAL(valueChanged(int)), hexpanel->verticalScrollBar(), SLOT(setValue(int)));
+
+    hexpanel->calculateMinimumWidth();
+    textpanel->calculateMinimumWidth();
 }
 
 TabPanel::~TabPanel()

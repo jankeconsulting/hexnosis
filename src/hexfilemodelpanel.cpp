@@ -1,4 +1,5 @@
 #include "hexfilemodelpanel.h"
+#include <QDebug>
 
 HexFileModelPanel::HexFileModelPanel(QWidget *parent) :
     QTableView(parent)
@@ -29,12 +30,13 @@ void HexFileModelPanel::calculateMinimumWidth()
     }
     total_width += column_width;
     total_width += frameWidth()*2;
-    if(verticalHeader()->isVisible())
+//    if(verticalHeader()->isVisible())
         total_width += verticalHeader()->width();
-    if(verticalScrollBar()->isVisible())
+    qDebug() << verticalScrollBar()->isVisible();
+//    if(verticalScrollBar()->isVisible())
+    if(verticalScrollBarPolicy() == Qt::ScrollBarAlwaysOn || verticalScrollBarPolicy() == Qt::ScrollBarAsNeeded)
         total_width += verticalScrollBar()->sizeHint().width();
     setMinimumWidth(total_width);
-
 }
 
 void HexFileModelPanel::setHighlight(QModelIndex index)
