@@ -49,11 +49,11 @@ void HexnosisWindow::currentTabChanged(int index)
     Q_UNUSED(index);
     if(tab->count() > 0) {
         enableActions(true);
+        if(!qobject_cast<TabPanel *>(tab->currentWidget())->model()->hasFile()) {
+            ui->actionSave->setEnabled(false);
+        }
     } else {
         enableActions(false);
-    }
-    if(!qobject_cast<TabPanel *>(tab->currentWidget())->model()->hasFile()) {
-        ui->actionSave->setEnabled(false);
     }
 }
 

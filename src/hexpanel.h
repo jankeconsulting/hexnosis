@@ -7,23 +7,22 @@
 #ifndef HEXPANEL_H
 #define HEXPANEL_H
 
-#include <QTableView>
-#include <QHeaderView>
-#include "./hexpanelitemdelegate.h"
+#include "hexfilemodelpanel.h"
+#include "hexpanelitemdelegate.h"
 
-class HexPanel : public QTableView
+// TODO: Make width more flexible due to font etc
+#define HEXPANEL_DEFAULT_COLUMN_WIDTH 25
+
+class HexPanel : public HexFileModelPanel
 {
     Q_OBJECT
 public:
     explicit HexPanel(QWidget *parent = 0);
     ~HexPanel();
-    void formatColumns();
-    void calculateMinimumWidth();
 
 signals:
 
 public slots:
-    void setHighlight(QModelIndex index);
 
 private:
     void formatPanel();

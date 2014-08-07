@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     textpanel.cpp \
     tabpanel.cpp \
     hextabwidget.cpp \
-    hexnosiswindow.cpp
+    hexnosiswindow.cpp \
+    hexfilemodelpanel.cpp
 
 HEADERS  += \
     hexpanel.h \
@@ -31,7 +32,8 @@ HEADERS  += \
     textpanel.h \
     tabpanel.h \
     hextabwidget.h \
-    hexnosiswindow.h
+    hexnosiswindow.h \
+    hexfilemodelpanel.h
 
 FORMS    += \
     hexnosiswindow.ui

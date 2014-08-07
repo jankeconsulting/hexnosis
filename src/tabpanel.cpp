@@ -31,8 +31,6 @@ TabPanel::TabPanel(QWidget *parent, QFile *file) :
 
     textpanel->setSelectionModel(hexpanel->selectionModel());
     connect(textpanel->verticalScrollBar(), SIGNAL(valueChanged(int)), hexpanel->verticalScrollBar(), SLOT(setValue(int)));
-    hexpanel->formatColumns();
-    textpanel->formatColumns();
 }
 
 TabPanel::~TabPanel()

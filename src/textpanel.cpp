@@ -8,9 +8,8 @@
 #include <QDebug>
 
 TextPanel::TextPanel(QWidget *parent) :
-    QTableView(parent)
+    HexFileModelPanel(parent)
 {
-    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
     TextPanelItemDelegate *delegate = new TextPanelItemDelegate();
     setItemDelegate(qobject_cast<QAbstractItemDelegate *>(delegate));
     formatPanel();
@@ -18,30 +17,9 @@ TextPanel::TextPanel(QWidget *parent) :
 
 TextPanel::~TextPanel()
 {
-    delete itemDelegate();
-    delete model();
 }
 
 void TextPanel::formatPanel()
 {
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setShowGrid(false);
-    horizontalHeader()->setDefaultSectionSize(13);
-    verticalHeader()->setDefaultSectionSize(15);
-}
-
-void TextPanel::formatColumns()
-{
-    for(int i=0; i<16; i++) {
-        setColumnWidth(i+16, 13);
-    }
-}
-
-void TextPanel::calculateMinimumWidth()
-{
-    int column_width = 0;
-    for(int i = 0; i< model()->columnCount(); i++) {
-        column_width += columnWidth(i);
-    }
-    setMinimumWidth(verticalHeader()->width() + column_width + frameWidth()*2 + verticalScrollBar()->sizeHint().width());
+    horizontalHeader()->setDefaultSectionSize(TEXTPANEL_DEFAULT_COLUMN_WIDTH);
 }
