@@ -33,7 +33,11 @@ public:
     bool saveDatatoFile(QString filename, int length = 0, int offset = 0);
     void createBuffer(int len = 0, char fillchar = 0);
     void setColumnHeaders();
+
     QString fileName(bool with_path = false);
+    bool hasFile() {
+        return (file != 0);
+    }
 
 signals:
 

@@ -41,7 +41,7 @@ private:
     Ui::HexnosisWindow *ui;
     HexTabWidget *tab;
 
-    void updateHexPanelActionStates(bool enable = false);
+    void enableActions(bool enable = false);
     void findWorkingTheme();
     void setIconFallbacks();
 };

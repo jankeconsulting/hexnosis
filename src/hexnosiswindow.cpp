@@ -16,7 +16,7 @@ HexnosisWindow::HexnosisWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle(QString(tr("Hexnosis - Hex Editor")));
     setIconFallbacks();
-    updateHexPanelActionStates(false);
+    enableActions(false);
     tab = new HexTabWidget(ui->centralWidget);
     tab->setTabsClosable(true);
     this->setCentralWidget(tab);
@@ -48,13 +48,16 @@ void HexnosisWindow::currentTabChanged(int index)
 {
     Q_UNUSED(index);
     if(tab->count() > 0) {
-        updateHexPanelActionStates(true);
+        enableActions(true);
     } else {
-        updateHexPanelActionStates(false);
+        enableActions(false);
+    }
+    if(!qobject_cast<TabPanel *>(tab->currentWidget())->model()->hasFile()) {
+        ui->actionSave->setEnabled(false);
     }
 }
 
-void HexnosisWindow::updateHexPanelActionStates(bool enable)
+void HexnosisWindow::enableActions(bool enable)
 {
 //    TODO: save needs to be disabled when tab has no filename
     ui->actionClose->setEnabled(enable);
@@ -140,3 +143,5 @@ void HexnosisWindow::on_actionAboutQt_triggered()
 bool HexnosisWindow::rowShadingState() {
     return ui->actionRow_Shading->isChecked();
 }
+
+
