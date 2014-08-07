@@ -73,19 +73,14 @@ bool HexFileModel::setHeaderData(int section, Qt::Orientation orientation, const
     Q_UNUSED(orientation);
     Q_UNUSED(value);
     Q_UNUSED(role);
-//    TODO: Implement this
+//  Headers are automatically set, cannot be set from outside
     return true;
 }
 
 QVariant HexFileModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    Q_UNUSED(section);
-    Q_UNUSED(orientation);
-    Q_UNUSED(role);
-//    TODO: Implement this
-//    if (role == Qt::SizeHintRole)
-//        return QSize(1, 1);
     if (role == Qt::DisplayRole) {
+//        TODO: Should representation of header be located in Delegate?
         if(orientation == Qt::Horizontal) {
             return QString("%1").arg(QByteArray(1, section).toHex().toUpper().data()[1]);
         }

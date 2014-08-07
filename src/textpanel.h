@@ -9,6 +9,7 @@
 
 #include <QTableView>
 #include <QHeaderView>
+#include <QScrollBar>
 #include "./textpanelitemdelegate.h"
 
 class TextPanel : public QTableView
@@ -18,6 +19,7 @@ public:
     explicit TextPanel(QWidget *parent = 0);
     ~TextPanel();
     void formatColumns();
+    void calculateMinimumWidth();
 
 signals:
 

@@ -18,6 +18,7 @@ public:
     explicit HexPanel(QWidget *parent = 0);
     ~HexPanel();
     void formatColumns();
+    void calculateMinimumWidth();
 
 signals:
 

@@ -10,6 +10,7 @@
 HexPanel::HexPanel(QWidget *parent) :
     QTableView(parent)
 {
+    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
     HexPanelItemDelegate *delegate = new HexPanelItemDelegate();
     setItemDelegate(static_cast<QAbstractItemDelegate *>(delegate));
     formatPanel();
@@ -26,6 +27,7 @@ HexPanel::~HexPanel()
 
 void HexPanel::formatPanel()
 {
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setShowGrid(false);
     horizontalHeader()->setDefaultSectionSize(25);
@@ -37,6 +39,15 @@ void HexPanel::formatColumns()
     for(int i=0; i<16; i++) {
         setColumnWidth(i+16, 13);
     }
+}
+
+void HexPanel::calculateMinimumWidth()
+{
+    int column_width = 0;
+    for(int i = 0; i< model()->columnCount(); i++) {
+        column_width += columnWidth(i);
+    }
+    setMinimumWidth(verticalHeader()->width() + column_width + frameWidth());
 }
 
 void HexPanel::setHighlight(QModelIndex index)
