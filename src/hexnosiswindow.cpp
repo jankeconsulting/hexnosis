@@ -30,10 +30,10 @@ HexnosisWindow::HexnosisWindow(QWidget *parent) :
 
 HexnosisWindow::~HexnosisWindow()
 {
-    delete cursorPosition;
-    delete cursorValue;
     delete tab;
     delete ui;
+    delete cursorPosition;
+    delete cursorValue;
 }
 
 void HexnosisWindow::closeTab(int index)
@@ -114,8 +114,10 @@ void HexnosisWindow::updateCursorInfo(int offset, int value)
 
 void HexnosisWindow::clearCursorInfo()
 {
-    cursorPosition->setText("");
-    cursorValue->setText("");
+    if(cursorPosition)
+        cursorPosition->clear();
+    if(cursorValue)
+        cursorValue->clear();
 }
 
 void HexnosisWindow::on_actionNew_triggered()
