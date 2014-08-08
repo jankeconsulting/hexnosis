@@ -33,6 +33,8 @@ TabPanel::TabPanel(QWidget *parent, QFile *file) :
 
     hexpanel->calculateMinimumWidth();
     textpanel->calculateMinimumWidth();
+    connect(hexpanel->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), model(), SLOT(updateCursorInfo(QModelIndex, QModelIndex)));
+
 }
 
 TabPanel::~TabPanel()

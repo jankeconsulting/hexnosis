@@ -10,6 +10,7 @@
 #include <QMainWindow>
 #include <QApplication>
 #include <QtGui>
+#include <QLabel>
 #include "./hextabwidget.h"
 
 namespace Ui {
@@ -33,6 +34,7 @@ private slots:
     void on_actionAbout_triggered();
     void on_actionAboutQt_triggered();
 
+    void createStatusBar();
     void closeTab(int index);
     void currentTabChanged(int index);
     bool rowShadingState();
@@ -47,10 +49,17 @@ private slots:
 private:
     Ui::HexnosisWindow *ui;
     HexTabWidget *tab;
+    static QLabel *cursorPosition;
+    static QLabel *cursorValue;
 
     void enableActions(bool enable = false);
     void findWorkingTheme();
     void setIconFallbacks();
+
+public slots:
+    static void updateCursorInfo(int offset, int value);
+    static void clearCursorInfo();
 };
 
 #endif // HEXNOSISWINDOW_H
+

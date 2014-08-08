@@ -6,6 +6,8 @@
 
 #include "hexpanel.h"
 #include <QDebug>
+#include "hexnosiswindow.h"
+
 
 HexPanel::HexPanel(QWidget *parent) :
     HexFileModelPanel(parent)

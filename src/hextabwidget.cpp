@@ -9,7 +9,7 @@
 
 HexTabWidget::HexTabWidget(QWidget *parent) :
     QTabWidget(parent)
-{    
+{
 }
 
 HexTabWidget::~HexTabWidget()

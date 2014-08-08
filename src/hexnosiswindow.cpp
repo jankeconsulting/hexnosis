@@ -8,6 +8,9 @@
 #include "ui_hexnosiswindow.h"
 #include <QDebug>
 
+QLabel *HexnosisWindow::cursorPosition = 0;
+QLabel *HexnosisWindow::cursorValue = 0;
+
 HexnosisWindow::HexnosisWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::HexnosisWindow)
@@ -22,10 +25,13 @@ HexnosisWindow::HexnosisWindow(QWidget *parent) :
     this->setCentralWidget(tab);
     connect(tab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
     connect(tab, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
+    createStatusBar();
 }
 
 HexnosisWindow::~HexnosisWindow()
 {
+    delete cursorPosition;
+    delete cursorValue;
     delete tab;
     delete ui;
 }
@@ -47,8 +53,11 @@ void HexnosisWindow::currentTabChanged(int index)
         if(!qobject_cast<TabPanel *>(tab->currentWidget())->model()->hasFile()) {
             ui->actionSave->setEnabled(false);
         }
+        QModelIndex index = qobject_cast<TabPanel *>(tab->currentWidget())->hexPanel()->selectionModel()->currentIndex();
+        qobject_cast<TabPanel *>(tab->currentWidget())->model()->updateCursorInfo(index, index);
     } else {
         enableActions(false);
+        clearCursorInfo();
     }
 }
 
@@ -97,6 +106,18 @@ void HexnosisWindow::setIconFallbacks()
         ui->actionNew->setIcon(this->style()->standardIcon(QStyle::SP_FileDialogStart));
 }
 
+void HexnosisWindow::updateCursorInfo(int offset, int value)
+{
+    cursorPosition->setText(tr("Cursor Offset : %1").arg(offset));
+    cursorValue->setText(tr("Cursor Value : %1").arg(value));
+}
+
+void HexnosisWindow::clearCursorInfo()
+{
+    cursorPosition->setText("");
+    cursorValue->setText("");
+}
+
 void HexnosisWindow::on_actionNew_triggered()
 {
     tab->createFile();
@@ -132,6 +153,14 @@ void HexnosisWindow::on_actionAbout_triggered()
 void HexnosisWindow::on_actionAboutQt_triggered()
 {
     qApp->aboutQt();
+}
+
+void HexnosisWindow::createStatusBar()
+{
+    cursorPosition = new QLabel();
+    statusBar()->addPermanentWidget(cursorPosition);
+    cursorValue = new QLabel();
+    statusBar()->addPermanentWidget(cursorValue);
 }
 
 bool HexnosisWindow::rowShadingState() {

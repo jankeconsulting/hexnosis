@@ -4,6 +4,7 @@
  * Author: Ralph Janke hexnosis@jankeconsulting.ca
  */
 
+#include "hexnosiswindow.h"
 #include "hexfilemodel.h"
 #include <QDebug>
 
@@ -135,6 +136,14 @@ void HexFileModel::setColumnHeaders()
     }
 }
 
+void HexFileModel::updateCursorInfo(QModelIndex current, QModelIndex previous)
+{
+    Q_UNUSED(previous);
+    if(current.isValid())
+        HexnosisWindow::updateCursorInfo(current.row()*columnCount()+current.column(), data(current, Qt::DisplayRole).toInt());
+    else
+        HexnosisWindow::clearCursorInfo();
+}
 
 
 

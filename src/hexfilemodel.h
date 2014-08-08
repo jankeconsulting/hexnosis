@@ -42,6 +42,7 @@ public:
 signals:
 
 public slots:
+    void updateCursorInfo(QModelIndex current, QModelIndex previousRow);
 
 private:
     QWidget *widget;
