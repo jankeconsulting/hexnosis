@@ -45,7 +45,6 @@ public slots:
     void updateCursorInfo(QModelIndex current, QModelIndex previousRow);
 
 private:
-    QWidget *widget;
     QFile *file;
     QByteArray filebuffer;
     int tablewidth;

@@ -38,7 +38,12 @@ HexnosisWindow::~HexnosisWindow()
 
 void HexnosisWindow::closeTab(int index)
 {
-    delete tab->widget(index);
+    QWidget *p = tab->widget(index);
+    tab->removeTab(index);
+    qDebug() << p->size();
+    delete p;
+
+//    delete tab->widget(index);
 //    TODO: Investigate
 //    oddly, the tab disappears by itself when widget is deleted so
 //    following line would remove another tab.

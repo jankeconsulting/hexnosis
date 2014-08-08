@@ -145,5 +145,3 @@ void HexFileModel::updateCursorInfo(QModelIndex current, QModelIndex previous)
         HexnosisWindow::clearCursorInfo();
 }
 
-
-
