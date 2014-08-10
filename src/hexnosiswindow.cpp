@@ -10,6 +10,7 @@
 
 QLabel *HexnosisWindow::cursorPosition = 0;
 QLabel *HexnosisWindow::cursorValue = 0;
+QDockWidget *HexnosisWindow::dataProcessor = 0;
 
 HexnosisWindow::HexnosisWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,6 +18,8 @@ HexnosisWindow::HexnosisWindow(QWidget *parent) :
 {
     findWorkingTheme();
     ui->setupUi(this);
+    dataProcessor = ui->dataProcessorDockWidget;
+    dataProcessor->setVisible(ui->actionDataProcessor->isChecked());
     setWindowTitle(QString(tr("Hexnosis - Hex Editor")));
     setIconFallbacks();
     enableActions(false);
@@ -25,6 +28,9 @@ HexnosisWindow::HexnosisWindow(QWidget *parent) :
     this->setCentralWidget(tab);
     connect(tab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
     connect(tab, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
+    connect(tab, SIGNAL(cursorDataChanged(QByteArray)), this, SLOT(updateDataProcessor(QByteArray)));
+    connect(ui->unsignedCheckBox, SIGNAL(toggled(bool)), tab, SLOT(currentCursorData()));
+    connect(ui->bigEndianCheckBox, SIGNAL(toggled(bool)), tab, SLOT(currentCursorData()));
     createStatusBar();
 }
 
@@ -40,14 +46,7 @@ void HexnosisWindow::closeTab(int index)
 {
     QWidget *p = tab->widget(index);
     tab->removeTab(index);
-    qDebug() << p->size();
     delete p;
-
-//    delete tab->widget(index);
-//    TODO: Investigate
-//    oddly, the tab disappears by itself when widget is deleted so
-//    following line would remove another tab.
-//    tab->removeTab(index);
 }
 
 void HexnosisWindow::currentTabChanged(int index)
@@ -123,6 +122,63 @@ void HexnosisWindow::clearCursorInfo()
         cursorPosition->clear();
     if(cursorValue)
         cursorValue->clear();
+}
+
+void HexnosisWindow::updateDataProcessor(QByteArray data)
+{
+//    TODO: refactor this
+    char *bytes = data.data();
+    if(ui->unsignedCheckBox->isChecked()) {
+        uchar charByte = data[0];
+        ui->int8Editor->setText(QString().setNum(charByte, 10));
+        ushort shortBytes;
+        memcpy(&shortBytes, bytes, sizeof(ushort));
+        ui->int16Editor->setText(QString().setNum(shortBytes));
+        uint intBytes;
+        memcpy(&intBytes, bytes, sizeof(uint));
+        ui->int32Editor->setText(QString().setNum(intBytes));
+        ulong longBytes;
+        memcpy(&longBytes, bytes, sizeof(ulong));
+        ui->int64Editor->setText(QString().setNum(longBytes));
+    } else {
+        ui->int8Editor->setText(QString().setNum(data[0], 10));
+        short shortBytes;
+        memcpy(&shortBytes, bytes, sizeof(short));
+        ui->int16Editor->setText(QString().setNum(shortBytes));
+        int intBytes;
+        memcpy(&intBytes, bytes, sizeof(int));
+        ui->int32Editor->setText(QString().setNum(intBytes));
+        long longBytes;
+        memcpy(&longBytes, bytes, sizeof(long));
+        ui->int64Editor->setText(QString().setNum(longBytes));
+    }
+    QString bitBytes = QString("");
+    for(int i = 7; i >= 0; i--)
+    {
+        if(1 << i & data[0]) {
+            bitBytes.append("1");
+        } else {
+            bitBytes.append("0");
+        }
+    }
+    ui->binaryEditor->setText(bitBytes);
+    float floatBytes;
+    memcpy(&floatBytes, bytes, sizeof(float));
+    ui->floatEditor->setText(QString().setNum(floatBytes));
+    double doubleBytes;
+    memcpy(&doubleBytes, bytes, sizeof(double));
+    ui->doubleEditor->setText(QString().setNum(doubleBytes));
+}
+
+void HexnosisWindow::clearDataProcessor()
+{
+    ui->binaryEditor->clear();
+    ui->int8Editor->clear();
+    ui->int16Editor->clear();
+    ui->int32Editor->clear();
+    ui->int64Editor->clear();
+    ui->floatEditor->clear();
+    ui->doubleEditor->clear();
 }
 
 void HexnosisWindow::on_actionNew_triggered()
@@ -205,3 +261,4 @@ void HexnosisWindow::on_actionCharDisplay_toggled(bool state)
 {
     tab->setTextPanelVisibility(state);
 }
+

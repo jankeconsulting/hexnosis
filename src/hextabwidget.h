@@ -37,9 +37,10 @@ public:
     void setTextPanelVisibility(bool state);
 
 signals:
+    void cursorDataChanged(QByteArray data);
 
 public slots:
-
+    void currentCursorData();
 };
 
 #endif // HEXTABWIDGET_H

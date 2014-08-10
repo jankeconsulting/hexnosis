@@ -10,6 +10,7 @@
 HexTabWidget::HexTabWidget(QWidget *parent) :
     QTabWidget(parent)
 {
+    connect(this, SIGNAL(currentChanged(int)), this, SLOT(currentCursorData()));
 }
 
 HexTabWidget::~HexTabWidget()
@@ -24,7 +25,8 @@ void HexTabWidget::addTabPage(TabPanel *page, QString tabname, QString tabhint)
     addTab(page, tabname);
     setTabToolTip(indexOf(page), tabhint);
     setCurrentWidget(page);
-
+    connect(page->hexPanel()->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(currentCursorData()));
+    connect(page->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(currentCursorData()));
 }
 
 void HexTabWidget::createFile()
@@ -79,6 +81,15 @@ void HexTabWidget::setTextPanelVisibility(bool state)
         QWidget* w = widget(i);
         qobject_cast<TabPanel *>(w)->setTextPanelVisibility(state);
     }
+}
+
+void HexTabWidget::currentCursorData()
+{
+    if(count() > 0) {
+        TabPanel *tabwidget = qobject_cast<TabPanel *>(currentWidget());
+        QByteArray bytes = tabwidget->model()->data(8, tabwidget->hexPanel()->currentIndex(), Qt::DisplayRole);
+        emit cursorDataChanged(bytes);
+       }
 }
 
 bool HexTabWidget::chooseFile()

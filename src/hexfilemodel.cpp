@@ -49,6 +49,22 @@ QVariant HexFileModel::data(const QModelIndex &index, int role) const
     return filebuffer.at(index.row()*columnCount()+index.column());
 }
 
+QByteArray HexFileModel::data( int length, const QModelIndex &index, int role) const
+{
+    if (!index.isValid() || (role != Qt::DisplayRole))
+        return QByteArray();
+    if (index.row()*columnCount()+index.column() >= filebuffer.size())
+        return QByteArray();
+    int len = filebuffer.size() - (index.row()*columnCount()+index.column());
+    if(len < length)
+        length = len;
+    QByteArray data = QByteArray();
+    data.resize(length);
+    for (int i=0; i<length; i++)
+        data[i] = filebuffer.at(index.row()*columnCount()+index.column()+i);
+    return data;
+}
+
 bool HexFileModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if(index.isValid() && role == Qt::EditRole) {
