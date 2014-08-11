@@ -35,6 +35,7 @@ public:
     void setAlternatingRowColors(bool state);
     void setHexPanelVisibility(bool state);
     void setTextPanelVisibility(bool state);
+    void setTextInCurrentTab(QByteArray data);
 
 signals:
     void cursorDataChanged(QByteArray data);

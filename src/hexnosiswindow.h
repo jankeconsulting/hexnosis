@@ -45,6 +45,17 @@ private slots:
     void on_actionHexDisplay_toggled(bool state);
     void on_actionCharDisplay_toggled(bool state);
 
+    void on_binaryEditor_textEdited(const QString &text);
+    void on_int8Editor_editingFinished();
+    void on_int16Editor_editingFinished();
+    void on_int32Editor_editingFinished();
+    void on_int64Editor_editingFinished();
+    void on_floatEditor_editingFinished();
+    void on_doubleEditor_editingFinished();
+
+    void on_editableCheckBox_toggled(bool checked);
+
+
 private:
     Ui::HexnosisWindow *ui;
     HexTabWidget *tab;
@@ -52,10 +63,20 @@ private:
     static QLabel *cursorPosition;
     static QLabel *cursorValue;
 
+    QValidator *int8validator;
+    QValidator *int16validator;
+    QValidator *int32validator;
+    QValidator *int64validator;
+    QValidator *floatvalidator;
+    QValidator *doublevalidator;
+
     void createStatusBar();
     void enableActions(bool enable = false);
     void findWorkingTheme();
     void setIconFallbacks();
+
+    void createDataProcessorValidators();
+    void setDataProcessorValidators();
 
 public slots:
     static void updateCursorInfo(int offset, int value);

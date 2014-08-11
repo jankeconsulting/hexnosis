@@ -17,7 +17,7 @@
    <string>Hexnosis - Hex Editor</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="hexnosis.qrc">
     <normaloff>:/icons/hexacross.ico</normaloff>:/icons/hexacross.ico</iconset>
   </property>
   <widget class="QWidget" name="centralWidget"/>
@@ -150,6 +150,9 @@
       </item>
       <item>
        <widget class="QCheckBox" name="bigEndianCheckBox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Big Endian</string>
         </property>
@@ -177,14 +180,20 @@
       <item row="0" column="1">
        <widget class="QLineEdit" name="binaryEditor">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
+        </property>
+        <property name="inputMask">
+         <string>BBBBBBBB</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QLineEdit" name="int8Editor">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
+        </property>
+        <property name="inputMask">
+         <string/>
         </property>
        </widget>
       </item>
@@ -205,7 +214,10 @@
       <item row="2" column="1">
        <widget class="QLineEdit" name="int16Editor">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
+        </property>
+        <property name="inputMask">
+         <string/>
         </property>
        </widget>
       </item>
@@ -219,7 +231,10 @@
       <item row="3" column="1">
        <widget class="QLineEdit" name="int32Editor">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
+        </property>
+        <property name="inputMask">
+         <string/>
         </property>
        </widget>
       </item>
@@ -233,7 +248,10 @@
       <item row="4" column="1">
        <widget class="QLineEdit" name="int64Editor">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
+        </property>
+        <property name="inputMask">
+         <string/>
         </property>
        </widget>
       </item>
@@ -254,14 +272,14 @@
       <item row="5" column="1">
        <widget class="QLineEdit" name="floatEditor">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item row="6" column="1">
        <widget class="QLineEdit" name="doubleEditor">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -382,7 +400,9 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="hexnosis.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actionQuit</sender>
@@ -429,118 +449,6 @@
     <hint type="destinationlabel">
      <x>-1</x>
      <y>-1</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>editableCheckBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>binaryEditor</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>48</x>
-     <y>89</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>194</x>
-     <y>120</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>editableCheckBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>int8Editor</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>48</x>
-     <y>89</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>194</x>
-     <y>149</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>editableCheckBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>int16Editor</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>48</x>
-     <y>89</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>194</x>
-     <y>178</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>editableCheckBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>int32Editor</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>48</x>
-     <y>89</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>194</x>
-     <y>207</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>editableCheckBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>int64Editor</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>48</x>
-     <y>89</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>194</x>
-     <y>236</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>editableCheckBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>floatEditor</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>48</x>
-     <y>89</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>194</x>
-     <y>265</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>editableCheckBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>doubleEditor</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>48</x>
-     <y>89</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>194</x>
-     <y>294</y>
     </hint>
    </hints>
   </connection>

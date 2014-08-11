@@ -83,13 +83,22 @@ void HexTabWidget::setTextPanelVisibility(bool state)
     }
 }
 
+void HexTabWidget::setTextInCurrentTab(QByteArray data)
+{
+    qDebug() << data;
+    if(count() > 0) {
+        TabPanel *tabwidget = qobject_cast<TabPanel *>(currentWidget());
+        tabwidget->model()->setData(tabwidget->hexPanel()->currentIndex(), data, Qt::EditRole);
+    }
+}
+
 void HexTabWidget::currentCursorData()
 {
     if(count() > 0) {
         TabPanel *tabwidget = qobject_cast<TabPanel *>(currentWidget());
         QByteArray bytes = tabwidget->model()->data(8, tabwidget->hexPanel()->currentIndex(), Qt::DisplayRole);
         emit cursorDataChanged(bytes);
-       }
+    }
 }
 
 bool HexTabWidget::chooseFile()

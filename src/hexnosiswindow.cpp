@@ -31,6 +31,8 @@ HexnosisWindow::HexnosisWindow(QWidget *parent) :
     connect(tab, SIGNAL(cursorDataChanged(QByteArray)), this, SLOT(updateDataProcessor(QByteArray)));
     connect(ui->unsignedCheckBox, SIGNAL(toggled(bool)), tab, SLOT(currentCursorData()));
     connect(ui->bigEndianCheckBox, SIGNAL(toggled(bool)), tab, SLOT(currentCursorData()));
+    on_editableCheckBox_toggled(ui->editableCheckBox->isChecked());
+    createDataProcessorValidators();
     createStatusBar();
 }
 
@@ -40,6 +42,13 @@ HexnosisWindow::~HexnosisWindow()
     delete ui;
     delete cursorPosition;
     delete cursorValue;
+    delete int8validator;
+    delete int16validator;
+    delete int32validator;
+    delete int64validator;
+    delete floatvalidator;
+    delete doublevalidator;
+
 }
 
 void HexnosisWindow::closeTab(int index)
@@ -108,6 +117,28 @@ void HexnosisWindow::setIconFallbacks()
         ui->actionOpen->setIcon(this->style()->standardIcon(QStyle::SP_DialogSaveButton));
     if(!QIcon::hasThemeIcon("document-new"))
         ui->actionNew->setIcon(this->style()->standardIcon(QStyle::SP_FileDialogStart));
+}
+
+void HexnosisWindow::createDataProcessorValidators()
+{
+    int8validator = new QIntValidator(-128, 255, this);
+    int16validator = new QIntValidator(-32768, 65535, this);
+    int32validator = new QIntValidator(-2147483648, 4294967295, this);
+    int64validator = new QIntValidator(-9223372036854775808, 18446744073709551615, this);
+    floatvalidator = new QDoubleValidator;
+    doublevalidator = new QDoubleValidator;
+
+    setDataProcessorValidators();
+}
+
+void HexnosisWindow::setDataProcessorValidators()
+{
+    ui->int8Editor->setValidator(int8validator);
+    ui->int16Editor->setValidator(int16validator);
+    ui->int32Editor->setValidator(int32validator);
+    ui->int64Editor->setValidator(int64validator);
+    ui->floatEditor->setValidator(floatvalidator);
+    ui->doubleEditor->setValidator(doublevalidator);
 }
 
 void HexnosisWindow::updateCursorInfo(int offset, int value)
@@ -261,4 +292,82 @@ void HexnosisWindow::on_actionCharDisplay_toggled(bool state)
 {
     tab->setTextPanelVisibility(state);
 }
+
+void HexnosisWindow::on_editableCheckBox_toggled(bool checked)
+{
+    ui->binaryEditor->setReadOnly(!checked);
+    ui->int8Editor->setReadOnly(!checked);
+    ui->int16Editor->setReadOnly(!checked);
+    ui->int32Editor->setReadOnly(!checked);
+    ui->int64Editor->setReadOnly(!checked);
+    ui->floatEditor->setReadOnly(!checked);
+    ui->doubleEditor->setReadOnly(!checked);
+}
+
+void HexnosisWindow::on_binaryEditor_textEdited(const QString &text)
+{
+
+}
+
+void HexnosisWindow::on_int8Editor_editingFinished()
+{
+    qDebug() << "HexnosisWindow::on_int8Editor_editingFinished";
+    int value = ui->int8Editor->text().toInt();
+    char c[1];
+    memcpy(&c, &value, 1);
+    char *cp;
+    cp = (&c[0]);
+    tab->setTextInCurrentTab(QByteArray().append(cp, 1));
+}
+
+void HexnosisWindow::on_int16Editor_editingFinished()
+{
+    short value = ui->int16Editor->text().toShort();
+    char c[sizeof(value)];
+    memcpy(&c, &value, 2);
+    char *cp;
+    cp = (&c[0]);
+    tab->setTextInCurrentTab(QByteArray().append(cp, sizeof(value)));
+}
+
+void HexnosisWindow::on_int32Editor_editingFinished()
+{
+    int value = ui->int32Editor->text().toInt();
+    char c[sizeof(value)];
+    memcpy(&c, &value, sizeof(value));
+    char *cp;
+    cp = (&c[0]);
+    tab->setTextInCurrentTab(QByteArray().append(cp, sizeof(value)));
+}
+
+void HexnosisWindow::on_int64Editor_editingFinished()
+{
+    long value = ui->int64Editor->text().toLongLong();
+    char c[sizeof(value)];
+    memcpy(&c, &value, sizeof(value));
+    char *cp;
+    cp = (&c[0]);
+    tab->setTextInCurrentTab(QByteArray().append(cp, sizeof(value)));
+}
+
+void HexnosisWindow::on_floatEditor_editingFinished()
+{
+    float value = ui->floatEditor->text().toFloat();
+    char c[sizeof(value)];
+    memcpy(&c, &value, sizeof(value));
+    char *cp;
+    cp = (&c[0]);
+    tab->setTextInCurrentTab(QByteArray().append(cp, sizeof(value)));
+}
+
+void HexnosisWindow::on_doubleEditor_editingFinished()
+{
+    double value = ui->doubleEditor->text().toDouble();
+    char c[sizeof(value)];
+    memcpy(&c, &value, sizeof(value));
+    char *cp;
+    cp = (&c[0]);
+    tab->setTextInCurrentTab(QByteArray().append(cp, sizeof(value)));
+}
+
 

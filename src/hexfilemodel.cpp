@@ -75,6 +75,29 @@ bool HexFileModel::setData(const QModelIndex &index, const QVariant &value, int 
     return false;
 }
 
+bool HexFileModel::setData(const QModelIndex &index, const QByteArray &value, int role)
+{
+    qDebug() << "model replacing begin index:  "<< index;
+    QModelIndex index2;
+    if ((index.column() + value.size()) < columnCount()) {
+        index2 = QAbstractItemModel::createIndex(index.row(), index.column()+value.size()-1);
+    }
+    else {
+        int row = (index.row() + (value.size() / tablewidth)) + 1;
+        int column = (index.column()+value.size()-1) % tablewidth;
+        index2 = QAbstractItemModel::createIndex(row, column);
+    }
+
+    qDebug() << "model replacing end index:  "<< index2;
+    if(index.isValid() && role == Qt::EditRole) {
+        qDebug() << "model replacing bytes:  "<< value.size();
+        filebuffer.replace(index.row()*columnCount()+index.column(), value.size(), value);
+        emit dataChanged(index, index2);
+        return true;
+    }
+    return false;
+}
+
 Qt::ItemFlags HexFileModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
