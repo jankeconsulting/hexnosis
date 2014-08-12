@@ -11,7 +11,13 @@
 #include <QApplication>
 #include <QtGui>
 #include <QLabel>
-#include "./hextabwidget.h"
+#include "hextabwidget.h"
+#include "lib/qxvalidator.h"
+
+#ifndef HEXNOSIS_REVISION
+#define HEXNOSIS_REVISION "1.0.0"
+#endif
+
 
 namespace Ui {
 class HexnosisWindow;

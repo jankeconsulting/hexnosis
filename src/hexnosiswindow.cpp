@@ -124,9 +124,9 @@ void HexnosisWindow::createDataProcessorValidators()
     int8validator = new QIntValidator(-128, 255, this);
     int16validator = new QIntValidator(-32768, 65535, this);
 //    int32validator = new QIntValidator(-2147483648, 4294967295, this);
-    int32validator = new QIntValidator(this);
-//    int64validator = new QIntValidator(-9223372036854775808, 18446744073709551615, this);
-    int64validator = new QIntValidator(this);
+    int32validator = new QxLongValidator(this);
+//    int64validator = new QxLongValidator(-9223372036854775808, 18446744073709551615, this);
+    int64validator = new QxLongValidator(this);
     floatvalidator = new QDoubleValidator;
     doublevalidator = new QDoubleValidator;
 
@@ -330,9 +330,17 @@ void HexnosisWindow::on_int8Editor_editingFinished()
 
 void HexnosisWindow::on_int16Editor_editingFinished()
 {
-    short value = ui->int16Editor->text().toShort();
+    bool ok;
+    short value = ui->int16Editor->text().toShort(&ok);
+    // need to use void* in order to allow both short and ushort being possible
+    void *p = &value;
+    if(!ok) {
+        qDebug()<< "Using ushort";
+        ushort value = ui->int16Editor->text().toUShort(&ok);
+        p = &value;
+    }
     char c[sizeof(value)];
-    memcpy(&c, &value, 2);
+    memcpy(&c, p, sizeof(value));
     char *cp;
     cp = (&c[0]);
     tab->setTextInCurrentTab(QByteArray().append(cp, sizeof(value)));
@@ -340,9 +348,17 @@ void HexnosisWindow::on_int16Editor_editingFinished()
 
 void HexnosisWindow::on_int32Editor_editingFinished()
 {
-    int value = ui->int32Editor->text().toInt();
+    bool ok;
+    int value = ui->int32Editor->text().toInt(&ok);
+    // need to use void* in order to allow both int and uint being possible
+    void *p = &value;
+    if(!ok) {
+        qDebug()<< "Using uint";
+        uint value = ui->int32Editor->text().toUInt(&ok);
+        p = &value;
+    }
     char c[sizeof(value)];
-    memcpy(&c, &value, sizeof(value));
+    memcpy(&c, p, sizeof(value));
     char *cp;
     cp = (&c[0]);
     tab->setTextInCurrentTab(QByteArray().append(cp, sizeof(value)));
@@ -350,9 +366,17 @@ void HexnosisWindow::on_int32Editor_editingFinished()
 
 void HexnosisWindow::on_int64Editor_editingFinished()
 {
+    bool ok;
     long value = ui->int64Editor->text().toLongLong();
+    // need to use void* in order to allow both long and ulong being possible
+    void *p = &value;
+    if(!ok) {
+        qDebug()<< "Using ulong";
+        ulong value = ui->int64Editor->text().toULongLong(&ok);
+        p = &value;
+    }
     char c[sizeof(value)];
-    memcpy(&c, &value, sizeof(value));
+    memcpy(&c, p, sizeof(value));
     char *cp;
     cp = (&c[0]);
     tab->setTextInCurrentTab(QByteArray().append(cp, sizeof(value)));
