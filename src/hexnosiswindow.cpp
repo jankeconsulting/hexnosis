@@ -123,8 +123,10 @@ void HexnosisWindow::createDataProcessorValidators()
 {
     int8validator = new QIntValidator(-128, 255, this);
     int16validator = new QIntValidator(-32768, 65535, this);
-    int32validator = new QIntValidator(-2147483648, 4294967295, this);
-    int64validator = new QIntValidator(-9223372036854775808, 18446744073709551615, this);
+//    int32validator = new QIntValidator(-2147483648, 4294967295, this);
+    int32validator = new QIntValidator(this);
+//    int64validator = new QIntValidator(-9223372036854775808, 18446744073709551615, this);
+    int64validator = new QIntValidator(this);
     floatvalidator = new QDoubleValidator;
     doublevalidator = new QDoubleValidator;
 
@@ -306,7 +308,13 @@ void HexnosisWindow::on_editableCheckBox_toggled(bool checked)
 
 void HexnosisWindow::on_binaryEditor_textEdited(const QString &text)
 {
-
+    char c = 0;
+    for(int i = 0; i < 8; i++) {
+        if(text[i] == QChar('1')) {
+            c |= (1 << (7-i));
+        }
+    }
+    tab->setTextInCurrentTab(QByteArray().append(&c, 1));
 }
 
 void HexnosisWindow::on_int8Editor_editingFinished()
