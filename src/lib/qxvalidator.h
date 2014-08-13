@@ -7,33 +7,34 @@
 class QxLongValidator : public QIntValidator
 {
     Q_OBJECT
-    Q_PROPERTY(qint64 bottom READ bottom WRITE setBottom NOTIFY bottomChanged)
-    Q_PROPERTY(quint64 top READ top WRITE setTop NOTIFY topChanged)
+    Q_PROPERTY(QVariant bottom READ bottom WRITE setBottom NOTIFY bottomChanged)
+    Q_PROPERTY(QVariant top READ top WRITE setTop NOTIFY topChanged)
 
 public:
     explicit QxLongValidator(QObject *parent = 0);
-    QxLongValidator(qint64 bottom, quint64 top, QObject *parent = 0);
+    QxLongValidator(QVariant bottom, QVariant top, QObject *parent = 0);
 
-    void setBottom(qint64 bottom);
-    void setTop(quint64 top);
-    virtual void setRange(qint64 bottom, quint64 top);
+    void setBottom(QVariant bottom);
+    void setTop(QVariant top);
+    virtual void setRange(QVariant bottom, QVariant top);
 
-    qint64 bottom() const { return b; }
-    quint64 top() const { return t; }
+    QVariant bottom() const { return b; }
+    QVariant top() const { return t; }
 
     QValidator::State validate(QString &input, int &) const;
 
 signals:
-    void bottomChanged(qint64 bottom);
-    void topChanged(quint64 top);
+    void bottomChanged(QVariant bottom);
+    void topChanged(QVariant top);
 
 public slots:
 
 private:
     Q_DISABLE_COPY(QxLongValidator)
+    bool checkType(QVariant value);
 
-    qint64 b;
-    quint64 t;
+    QVariant b;
+    QVariant t;
 };
 
 #endif // QXVALIDATOR_H
