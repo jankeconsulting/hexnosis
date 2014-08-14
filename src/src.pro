@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     hexfilemodelpanel.cpp \
     lib/qxvalidator.cpp \
     lib/qxutil.cpp \
-    aboutdialog.cpp
+    aboutdialog.cpp \
+    licensedialog.cpp
 
 HEADERS  += \
     hexpanel.h \
@@ -39,11 +40,13 @@ HEADERS  += \
     hexfilemodelpanel.h \
     lib/qxvalidator.h \
     lib/qxutil.h \
-    aboutdialog.h
+    aboutdialog.h \
+    licensedialog.h
 
 FORMS    += \
     hexnosiswindow.ui \
-    aboutdialog.ui
+    aboutdialog.ui \
+    licensedialog.ui
 
 CONFIG(release, debug|release) {
   DEFINES -= DEBUG

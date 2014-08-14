@@ -2,6 +2,7 @@
 #define ABOUTDIALOG_H
 
 #include <QDialog>
+#include "licensedialog.h"
 
 namespace Ui {
 class AboutDialog;
@@ -20,6 +21,7 @@ private slots:
 
 private:
     Ui::AboutDialog *ui;
+    LicenseDialog *license;
 };
 
 #endif // ABOUTDIALOG_H

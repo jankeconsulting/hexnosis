@@ -148,6 +148,9 @@
       <property name="text">
        <string>License</string>
       </property>
+      <property name="icon">
+       <iconset theme="dialog-information"/>
+      </property>
      </widget>
     </item>
     <item>
@@ -167,6 +170,9 @@
      <widget class="QPushButton" name="closeButton">
       <property name="text">
        <string>Close</string>
+      </property>
+      <property name="icon">
+       <iconset theme="window-close"/>
       </property>
      </widget>
     </item>
