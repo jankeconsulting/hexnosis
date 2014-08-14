@@ -18,6 +18,7 @@ HexnosisWindow::HexnosisWindow(QWidget *parent) :
 {
     findWorkingTheme();
     ui->setupUi(this);
+    about = new AboutDialog(this, HEXNOSIS_REVISION);
     dataProcessor = ui->dataProcessorDockWidget;
     dataProcessor->setVisible(ui->actionDataProcessor->isChecked());
     setWindowTitle(QString(tr("Hexnosis - Hex Editor")));
@@ -38,6 +39,7 @@ HexnosisWindow::HexnosisWindow(QWidget *parent) :
 
 HexnosisWindow::~HexnosisWindow()
 {
+    delete about;
     delete tab;
     delete ui;
     delete cursorPosition;
@@ -243,7 +245,7 @@ void HexnosisWindow::on_actionSaveAs_triggered()
 
 void HexnosisWindow::on_actionAbout_triggered()
 {
-//    TODO: Add about widget
+    about->show();
 }
 
 void HexnosisWindow::on_actionAboutQt_triggered()

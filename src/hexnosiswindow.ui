@@ -80,7 +80,6 @@
      <string>Help</string>
     </property>
     <addaction name="actionAbout"/>
-    <addaction name="separator"/>
     <addaction name="actionAboutQt"/>
    </widget>
    <addaction name="menuFile"/>
@@ -288,13 +287,16 @@
    </widget>
   </widget>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset theme="dialog-information"/>
+   </property>
    <property name="text">
-    <string>About</string>
+    <string>&amp;About Hexnosis</string>
    </property>
   </action>
   <action name="actionAboutQt">
    <property name="text">
-    <string>About Qt</string>
+    <string>About &amp;Qt</string>
    </property>
   </action>
   <action name="actionNew">

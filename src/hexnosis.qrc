@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>icons/hexacross.ico</file>
+        <file>icons/screw.png</file>
     </qresource>
 </RCC>

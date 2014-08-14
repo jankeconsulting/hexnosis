@@ -11,6 +11,7 @@
 #include <QApplication>
 #include <QtGui>
 #include <QLabel>
+#include "aboutdialog.h"
 #include "hextabwidget.h"
 #include "lib/qxvalidator.h"
 
@@ -64,6 +65,7 @@ private slots:
 
 private:
     Ui::HexnosisWindow *ui;
+    AboutDialog *about;
     HexTabWidget *tab;
     static QDockWidget *dataProcessor;
     static QLabel *cursorPosition;
