@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     hextabwidget.cpp \
     hexnosiswindow.cpp \
     hexfilemodelpanel.cpp \
-    lib/qxvalidator.cpp
+    lib/qxvalidator.cpp \
+    lib/qxutil.cpp
 
 HEADERS  += \
     hexpanel.h \
@@ -35,7 +36,8 @@ HEADERS  += \
     hextabwidget.h \
     hexnosiswindow.h \
     hexfilemodelpanel.h \
-    lib/qxvalidator.h
+    lib/qxvalidator.h \
+    lib/qxutil.h
 
 FORMS    += \
     hexnosiswindow.ui
