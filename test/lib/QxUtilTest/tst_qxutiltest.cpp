@@ -1,23 +1,23 @@
-#include "../../../src/lib/qxvalidator.h"
+#include "../../../src/lib/qxutil.h"
 #include <QtTest>
 
-class QxValidatorTest : public QObject
+class QxUtilTest : public QObject
 {
     Q_OBJECT
 
 public:
-    QxValidatorTest();
+    QxUtilTest();
 
 private Q_SLOTS:
     void testCompare();
     void testCompare_data();
 };
 
-QxValidatorTest::QxValidatorTest()
+QxUtilTest::QxUtilTest()
 {
 }
 
-void QxValidatorTest::testCompare()
+void QxUtilTest::testCompare()
 {
     QFETCH(QVariant, a);
     QFETCH(QVariant, b);
@@ -26,7 +26,7 @@ void QxValidatorTest::testCompare()
     QCOMPARE(QxUtil::compare(a,b), result);
 }
 
-void QxValidatorTest::testCompare_data()
+void QxUtilTest::testCompare_data()
 {
     QTest::addColumn<QVariant>("a");
     QTest::addColumn<QVariant>("b");
@@ -61,6 +61,6 @@ void QxValidatorTest::testCompare_data()
 
 }
 
-QTEST_APPLESS_MAIN(QxValidatorTest)
+QTEST_APPLESS_MAIN(QxUtilTest)
 
-#include "tst_qxvalidatortest.moc"
+#include "tst_qxutiltest.moc"
