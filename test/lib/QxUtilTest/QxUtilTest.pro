@@ -15,8 +15,10 @@ CONFIG   -= app_bundle
 
 TEMPLATE = app
 
+HEADERS += tst_qxutiltest.h
 
 SOURCES += \
     tst_qxutiltest.cpp
 SOURCES += ../../../src/lib/qxutil.cpp
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
+
