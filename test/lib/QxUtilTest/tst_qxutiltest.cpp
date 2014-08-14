@@ -52,13 +52,22 @@ void QxUtilTest::testCompare_data()
     u_a = Q_UINT64_C(18446744073709551615); u_b = Q_UINT64_C(18446744073709551615); QTest::newRow("unsigned 18446744073709551615, unsigned 18446744073709551615") << QVariant(u_a) << QVariant(u_b) << 0;
     u_a = Q_UINT64_C(18446744073709551614); u_b = Q_UINT64_C(18446744073709551615); QTest::newRow("unsigned 18446744073709551614, unsigned 18446744073709551615") << QVariant(u_a) << QVariant(u_b) << -1;
     u_a = Q_UINT64_C(18446744073709551615); u_b = Q_UINT64_C(18446744073709551614); QTest::newRow("unsigned 18446744073709551615, unsigned 18446744073709551614") << QVariant(u_a) << QVariant(u_b) << 1;
-
 }
 
 void QxUtilTest::testIsUnsignedType()
 {
-    qlonglong s = 0; QCOMPARE(QxUtil::isUnsignedType(QVariant(s)), false);
-    qulonglong u = 0; QCOMPARE(QxUtil::isUnsignedType(QVariant(u)), true);
+    QFETCH(QVariant, v);
+    QFETCH(bool, result);
+    QCOMPARE(QxUtil::isUnsignedType(v), result);
+}
+
+void QxUtilTest::testIsUnsignedType_data()
+{
+    QTest::addColumn<QVariant>("v");
+    QTest::addColumn<bool>("result");
+
+    qlonglong s = 0;  QTest::newRow("qlonglong") << QVariant(s) << false;
+    qulonglong u = 0; QTest::newRow("qulongling") << QVariant(u) << true;
 }
 
 QTEST_APPLESS_MAIN(QxUtilTest)

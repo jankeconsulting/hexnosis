@@ -20,6 +20,7 @@ private Q_SLOTS:
     void testCompare();
     void testCompare_data();
     void testIsUnsignedType();
+    void testIsUnsignedType_data();
 };
 
 #endif // QXUTILTEST_H
