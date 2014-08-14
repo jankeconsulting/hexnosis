@@ -78,6 +78,7 @@ bool HexFileModel::setData(const QModelIndex &index, const QVariant &value, int 
 bool HexFileModel::setData(const QModelIndex &index, const QByteArray &value, int role)
 {
     qDebug() << "model replacing begin index:  "<< index;
+    qDebug() << "model value.size:  "<< value.size();
     QModelIndex index2;
     if ((index.column() + value.size()) < columnCount()) {
         index2 = QAbstractItemModel::createIndex(index.row(), index.column()+value.size()-1);

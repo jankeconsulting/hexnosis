@@ -6,7 +6,7 @@ QxLongValidator::QxLongValidator(QObject *parent) :
 {
 //    TODO: set correct type (unsigned or signed)
     b = Q_INT64_C(-9223372036854775808);
-    t = Q_UINT64_C(18446744073309551616);
+    t = Q_UINT64_C(18446744073709551615);
 //    b = Q_INT64_C(-2147483648);
 //    t = Q_INT64_C(4294967295);
 }
@@ -93,6 +93,7 @@ QValidator::State QxLongValidator::validate(QString & input, int&) const
             qDebug() << "QxLongValidator::validate: toLongLong not ok and starts with '-'";
             return Invalid;
         } else {
+//            TODO: may be superflous... toLongLong seem to convert all???
             entered = QVariant(buff.toULongLong(&ok));
             qDebug() << "QxLongValidator::validate: toLongLong not ok and entered = " << entered;
             if(!ok)
@@ -103,10 +104,10 @@ QValidator::State QxLongValidator::validate(QString & input, int&) const
     qDebug() << "QxLongValidator::validate: entered is valid so far : " << entered;
     qDebug() << "QxLongValidator::validate: b = " << b;
     qDebug() << "QxLongValidator::validate: t = " << t;
-    qDebug() << "QxLongValidator::validate: entered >= b : " << (entered >=b);
-    qDebug() << "QxLongValidator::validate: entered <= t : " << (entered <=t);
+    qDebug() << "QxLongValidator::validate: compare(entered, b) : " << compare(entered,b);
+    qDebug() << "QxLongValidator::validate: compare(entered, t) : " << compare(entered,t);
 
-    if (entered >= b && entered <= t) {
+    if ((compare(entered, b) != -1) && (compare(entered, t) != 1)) {
 //        locale().toInt(input, &ok);
 //        return ok ? Acceptable : Intermediate;
         return Acceptable ;
@@ -114,30 +115,29 @@ QValidator::State QxLongValidator::validate(QString & input, int&) const
 
     qDebug() << "QxLongValidator::validate: not within boundaries";
 
-    if (entered < b) {
+    if (compare(entered, b) == -1) {
         return Invalid;
     }
 
-    if (entered > t) {
+    if (compare(entered, t) == 1) {
         return Invalid;
     }
-
-    qDebug() << "QxLongValidator::validate: too big or too small";
-
+/*
+    TODO: Only needed if - entered last is allowed (in place of above)
     if (entered >= 0) {
         // the -entered < b condition is necessary to allow people to type
         // the minus last (e.g. for right-to-left languages)
-        // return (entered > t && -entered < b) ? Invalid : Intermediate;
-        return (entered > t && entered < b) ? Invalid : Intermediate;
+        return (entered > t && -entered < b) ? Invalid : Intermediate;
     } else {
         return (entered < b) ? Invalid : Intermediate;
     }
+*/
+    qDebug() << "QxLongValidator::validate: should never get here";
 }
 
 bool QxLongValidator::checkType(QVariant value)
 {
-    return true;
-    //    TODO: Assert needed? Why not allow shorter ints converted into longs?
+//    TODO: Assert needed? Why not allow shorter ints converted into longs?
     switch(value.type()) {
     case QMetaType::LongLong:
     case QMetaType::ULongLong:

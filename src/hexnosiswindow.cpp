@@ -367,19 +367,25 @@ void HexnosisWindow::on_int32Editor_editingFinished()
 void HexnosisWindow::on_int64Editor_editingFinished()
 {
     bool ok;
-    long value = ui->int64Editor->text().toLongLong();
     // need to use void* in order to allow both long and ulong being possible
-    void *p = &value;
-    if(!ok) {
+    void *p;
+    QString text = ui->int64Editor->text();
+    if(text[0] == '-') {
+        qlonglong value = text.toLongLong(&ok);
+        qDebug()<< "qlonglong value = " << value;
+        p = &value;
+    } else {
         qDebug()<< "Using ulong";
-        ulong value = ui->int64Editor->text().toULongLong(&ok);
+        qulonglong value = text.toULongLong(&ok);
+        qDebug()<< "qulonglong value = " << value;
         p = &value;
     }
-    char c[sizeof(value)];
-    memcpy(&c, p, sizeof(value));
+    qDebug()<< "ok? = " << ok;
+    char c[8];
+    memcpy(&c, p, 8);
     char *cp;
     cp = (&c[0]);
-    tab->setTextInCurrentTab(QByteArray().append(cp, sizeof(value)));
+    tab->setTextInCurrentTab(QByteArray().append(cp, 8));
 }
 
 void HexnosisWindow::on_floatEditor_editingFinished()

@@ -3,8 +3,10 @@
 
 #include <QIntValidator>
 #include <QtCore/qlocale.h>
+#include "qxutil.h"
 
-class QxLongValidator : public QIntValidator
+
+class QxLongValidator : public QIntValidator, QxUtil
 {
     Q_OBJECT
     Q_PROPERTY(QVariant bottom READ bottom WRITE setBottom NOTIFY bottomChanged)
