@@ -59,26 +59,17 @@ QValidator::State QxLongValidator::validate(QString & input, int&) const
 
     QByteArray buff = QByteArray().insert(0, input);
 
-    qDebug() << "QxLongValidator::validate: input" << input;
     if (buff.isEmpty())
         return Intermediate;
-
-    qDebug() << "QxLongValidator::validate: buffer is not empty";
 
     if (b >= 0 && buff.startsWith('-'))
         return Invalid;
 
-    qDebug() << "QxLongValidator::validate: not b >= 0 && buff.startsWith('-')";
-
     if (t < 0 && buff.startsWith('+'))
         return Invalid;
 
-    qDebug() << "QxLongValidator::validate: not t < 0 && buff.startsWith('+')";
-
     if (buff.size() == 1 && (buff.at(0) == '+' || buff.at(0) == '-'))
         return Intermediate;
-
-    qDebug() << "QxLongValidator::validate: not buff.size() == 1 && (buff.at(0) == '+' || buff.at(0) == '-')";
 
 //    TODO: is locale necessary for this?
 //    bool ok, overflow;
@@ -90,30 +81,20 @@ QValidator::State QxLongValidator::validate(QString & input, int&) const
     QVariant entered = QVariant(buff.toLongLong(&ok));
     if(!ok) {
         if(buff.startsWith('-')) {
-            qDebug() << "QxLongValidator::validate: toLongLong not ok and starts with '-'";
             return Invalid;
         } else {
 //            TODO: may be superflous... toLongLong seem to convert all???
             entered = QVariant(buff.toULongLong(&ok));
-            qDebug() << "QxLongValidator::validate: toLongLong not ok and entered = " << entered;
             if(!ok)
                 return Invalid;
         }
     }
-
-    qDebug() << "QxLongValidator::validate: entered is valid so far : " << entered;
-    qDebug() << "QxLongValidator::validate: b = " << b;
-    qDebug() << "QxLongValidator::validate: t = " << t;
-    qDebug() << "QxLongValidator::validate: compare(entered, b) : " << compare(entered,b);
-    qDebug() << "QxLongValidator::validate: compare(entered, t) : " << compare(entered,t);
 
     if ((compare(entered, b) != -1) && (compare(entered, t) != 1)) {
 //        locale().toInt(input, &ok);
 //        return ok ? Acceptable : Intermediate;
         return Acceptable ;
     }
-
-    qDebug() << "QxLongValidator::validate: not within boundaries";
 
     if (compare(entered, b) == -1) {
         return Invalid;

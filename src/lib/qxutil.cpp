@@ -36,7 +36,6 @@ int QxUtil::compare(QVariant a, QVariant b)
             if(b.toULongLong() & 0x80000000) return -1;
             if(a < b) return -1;
             if(a == b) return 0;
-            qDebug() << "ttt" << a << " " << b;
             return 1;
         }
     }

@@ -85,7 +85,6 @@ void HexTabWidget::setTextPanelVisibility(bool state)
 
 void HexTabWidget::setTextInCurrentTab(QByteArray data)
 {
-    qDebug() << data;
     if(count() > 0) {
         TabPanel *tabwidget = qobject_cast<TabPanel *>(currentWidget());
         tabwidget->model()->setData(tabwidget->hexPanel()->currentIndex(), data, Qt::EditRole);

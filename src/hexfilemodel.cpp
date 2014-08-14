@@ -77,8 +77,6 @@ bool HexFileModel::setData(const QModelIndex &index, const QVariant &value, int 
 
 bool HexFileModel::setData(const QModelIndex &index, const QByteArray &value, int role)
 {
-    qDebug() << "model replacing begin index:  "<< index;
-    qDebug() << "model value.size:  "<< value.size();
     QModelIndex index2;
     if ((index.column() + value.size()) < columnCount()) {
         index2 = QAbstractItemModel::createIndex(index.row(), index.column()+value.size()-1);
@@ -89,9 +87,7 @@ bool HexFileModel::setData(const QModelIndex &index, const QByteArray &value, in
         index2 = QAbstractItemModel::createIndex(row, column);
     }
 
-    qDebug() << "model replacing end index:  "<< index2;
     if(index.isValid() && role == Qt::EditRole) {
-        qDebug() << "model replacing bytes:  "<< value.size();
         filebuffer.replace(index.row()*columnCount()+index.column(), value.size(), value);
         emit dataChanged(index, index2);
         return true;

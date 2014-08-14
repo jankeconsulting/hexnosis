@@ -319,7 +319,6 @@ void HexnosisWindow::on_binaryEditor_textEdited(const QString &text)
 
 void HexnosisWindow::on_int8Editor_editingFinished()
 {
-    qDebug() << "HexnosisWindow::on_int8Editor_editingFinished";
     int value = ui->int8Editor->text().toInt();
     char c[1];
     memcpy(&c, &value, 1);
@@ -335,7 +334,6 @@ void HexnosisWindow::on_int16Editor_editingFinished()
     // need to use void* in order to allow both short and ushort being possible
     void *p = &value;
     if(!ok) {
-        qDebug()<< "Using ushort";
         ushort value = ui->int16Editor->text().toUShort(&ok);
         p = &value;
     }
@@ -353,7 +351,6 @@ void HexnosisWindow::on_int32Editor_editingFinished()
     // need to use void* in order to allow both int and uint being possible
     void *p = &value;
     if(!ok) {
-        qDebug()<< "Using uint";
         uint value = ui->int32Editor->text().toUInt(&ok);
         p = &value;
     }
@@ -372,15 +369,11 @@ void HexnosisWindow::on_int64Editor_editingFinished()
     QString text = ui->int64Editor->text();
     if(text[0] == '-') {
         qlonglong value = text.toLongLong(&ok);
-        qDebug()<< "qlonglong value = " << value;
         p = &value;
     } else {
-        qDebug()<< "Using ulong";
         qulonglong value = text.toULongLong(&ok);
-        qDebug()<< "qulonglong value = " << value;
         p = &value;
     }
-    qDebug()<< "ok? = " << ok;
     char c[8];
     memcpy(&c, p, 8);
     char *cp;
