@@ -4,17 +4,15 @@
 QxLongValidator::QxLongValidator(QObject *parent) :
     QIntValidator(parent)
 {
-//    TODO: set correct type (unsigned or signed)
     b = Q_INT64_C(-9223372036854775808);
     t = Q_UINT64_C(18446744073709551615);
-//    b = Q_INT64_C(-2147483648);
-//    t = Q_INT64_C(4294967295);
 }
 
 QxLongValidator::QxLongValidator(QVariant bottom, QVariant top, QObject *parent) :
     QIntValidator(parent)
 
 {
+//    TODO: Assert needed?
     if(checkType(bottom))
         b = bottom;
     if(checkType(top))
@@ -104,7 +102,7 @@ QValidator::State QxLongValidator::validate(QString & input, int&) const
         return Invalid;
     }
 /*
-    TODO: Only needed if - entered last is allowed (in place of above)
+    TODO: Only needed if '-' entered last is allowed (in place of above)
     if (entered >= 0) {
         // the -entered < b condition is necessary to allow people to type
         // the minus last (e.g. for right-to-left languages)
@@ -118,7 +116,7 @@ QValidator::State QxLongValidator::validate(QString & input, int&) const
 
 bool QxLongValidator::checkType(QVariant value)
 {
-//    TODO: Assert needed? Why not allow shorter ints converted into longs?
+//    TODO: Why not allow shorter ints converted into longs?
     switch(value.type()) {
     case QMetaType::LongLong:
     case QMetaType::ULongLong:

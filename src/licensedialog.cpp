@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2014 Ralph Janke. All rights reserved.
+ *
+ * Author: Ralph Janke hexnosis@jankeconsulting.ca
+ */
+
 #include "licensedialog.h"
 #include "ui_licensedialog.h"
 

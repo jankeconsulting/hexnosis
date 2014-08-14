@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2014 Ralph Janke. All rights reserved.
+ *
+ * Author: Ralph Janke hexnosis@jankeconsulting.ca
+ */
+
 #ifndef ABOUTDIALOG_H
 #define ABOUTDIALOG_H
 

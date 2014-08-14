@@ -37,7 +37,7 @@ void HexFileModelPanel::calculateMinimumWidth()
     total_width += frameWidth()*2;
 //    if(verticalHeader()->isVisible())
         total_width += verticalHeader()->width();
-    // TODO: ideally there needs to be a change when scrollbar is hidden or shown
+//    TODO: ideally there needs to be a change when scrollbar is hidden or shown
 //    if(verticalScrollBar()->isVisible())
     if(verticalScrollBarPolicy() == Qt::ScrollBarAlwaysOn || verticalScrollBarPolicy() == Qt::ScrollBarAsNeeded)
         total_width += verticalScrollBar()->sizeHint().width();
