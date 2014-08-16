@@ -69,11 +69,12 @@
    </widget>
    <widget class="QMenu" name="menuOptions">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="title">
      <string>Options</string>
     </property>
+    <addaction name="actionPreferences"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -398,6 +399,14 @@
    </property>
    <property name="text">
     <string>&amp;Data Processor</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="icon">
+    <iconset theme="preferences-system"/>
+   </property>
+   <property name="text">
+    <string>Preferences</string>
    </property>
   </action>
  </widget>

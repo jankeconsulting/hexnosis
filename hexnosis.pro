@@ -13,6 +13,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 SUBDIRS += src \
     test/lib/QxUtilTest
 TEMPLATE = subdirs
+
 CONFIG(release, debug|release) {
   DEFINES -= DEBUG
 }
