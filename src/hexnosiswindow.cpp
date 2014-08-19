@@ -34,7 +34,6 @@ HexnosisWindow::HexnosisWindow(QWidget *parent) :
     connect(ui->bigEndianCheckBox, SIGNAL(toggled(bool)), tab, SLOT(currentCursorData()));
     on_editableCheckBox_toggled(ui->editableCheckBox->isChecked());
     createDataProcessorValidators();
-    createStatusBar();
 }
 
 HexnosisWindow::~HexnosisWindow()
@@ -214,6 +213,17 @@ void HexnosisWindow::clearDataProcessor()
     ui->int64Editor->clear();
     ui->floatEditor->clear();
     ui->doubleEditor->clear();
+}
+
+void HexnosisWindow::updateInfoDisplay(QString info)
+{
+    ui->infoDisplayTextBrowser->setText(info);
+}
+
+void HexnosisWindow::clearInfoDisplay()
+{
+    ui->infoDisplayTextBrowser->clear();
+
 }
 
 void HexnosisWindow::on_actionNew_triggered()
@@ -402,5 +412,4 @@ void HexnosisWindow::on_doubleEditor_editingFinished()
     cp = (&c[0]);
     tab->setTextInCurrentTab(QByteArray().append(cp, sizeof(value)));
 }
-
 

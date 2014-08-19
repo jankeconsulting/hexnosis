@@ -56,6 +56,7 @@
     <addaction name="actionHexDisplay"/>
     <addaction name="actionCharDisplay"/>
     <addaction name="actionDataProcessor"/>
+    <addaction name="actionInfoDisplay"/>
     <addaction name="separator"/>
     <addaction name="actionRowShading"/>
    </widget>
@@ -111,7 +112,13 @@
    <property name="minimumSize">
     <size>
      <width>330</width>
-     <height>530</height>
+     <height>270</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>330</width>
+     <height>270</height>
     </size>
    </property>
    <property name="allowedAreas">
@@ -287,6 +294,35 @@
     </widget>
    </widget>
   </widget>
+  <widget class="QDockWidget" name="infoDisplayDockWidget">
+   <property name="minimumSize">
+    <size>
+     <width>330</width>
+     <height>35</height>
+    </size>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Info Display</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="infoDisplayDockWidgetContents">
+    <widget class="QTextBrowser" name="infoDisplayTextBrowser">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>311</width>
+       <height>181</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+  </widget>
   <action name="actionAbout">
    <property name="icon">
     <iconset theme="dialog-information"/>
@@ -409,6 +445,16 @@
     <string>Preferences</string>
    </property>
   </action>
+  <action name="actionInfoDisplay">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Info Display</string>
+   </property>
+  </action>
+  <zorder>dataProcessorDockWidget</zorder>
+  <zorder>infoDisplayDockWidget</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
@@ -460,6 +506,22 @@
     <hint type="destinationlabel">
      <x>-1</x>
      <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionInfoDisplay</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>infoDisplayDockWidget</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>36</x>
+     <y>236</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>164</x>
+     <y>571</y>
     </hint>
    </hints>
   </connection>

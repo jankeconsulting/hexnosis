@@ -11,6 +11,7 @@
 #include <QApplication>
 #include <QtGui>
 #include <QLabel>
+#include <QTextBrowser>
 #include "aboutdialog.h"
 #include "hextabwidget.h"
 #include "lib/qxvalidator.h"
@@ -62,7 +63,6 @@ private slots:
 
     void on_editableCheckBox_toggled(bool checked);
 
-
 private:
     Ui::HexnosisWindow *ui;
     AboutDialog *about;
@@ -91,6 +91,8 @@ public slots:
     static void clearCursorInfo();
     void updateDataProcessor(QByteArray data);
     void clearDataProcessor();
+    void updateInfoDisplay(QString info);
+    void clearInfoDisplay();
 };
 
 #endif // HEXNOSISWINDOW_H
