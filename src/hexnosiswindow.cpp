@@ -34,6 +34,7 @@ HexnosisWindow::HexnosisWindow(QWidget *parent) :
     connect(ui->bigEndianCheckBox, SIGNAL(toggled(bool)), tab, SLOT(currentCursorData()));
     on_editableCheckBox_toggled(ui->editableCheckBox->isChecked());
     createDataProcessorValidators();
+    createStatusBar();
 }
 
 HexnosisWindow::~HexnosisWindow()
