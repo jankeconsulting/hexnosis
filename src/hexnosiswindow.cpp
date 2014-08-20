@@ -65,14 +65,17 @@ void HexnosisWindow::currentTabChanged(int index)
     Q_UNUSED(index);
     if(tab->count() > 0) {
         enableActions(true);
-        if(!qobject_cast<TabPanel *>(tab->currentWidget())->model()->hasFile()) {
+        TabPanel *tabpanel = qobject_cast<TabPanel *>(tab->currentWidget());
+        if(!tabpanel->model()->hasFile()) {
             ui->actionSave->setEnabled(false);
         }
-        QModelIndex index = qobject_cast<TabPanel *>(tab->currentWidget())->hexPanel()->selectionModel()->currentIndex();
-        qobject_cast<TabPanel *>(tab->currentWidget())->model()->updateCursorInfo(index, index);
+        QModelIndex index = tabpanel->hexPanel()->selectionModel()->currentIndex();
+        tabpanel->model()->updateCursorInfo(index, index);
+        updateInfoDisplay(tabpanel->model()->fileInfo());
     } else {
         enableActions(false);
         clearCursorInfo();
+        clearInfoDisplay();
     }
 }
 

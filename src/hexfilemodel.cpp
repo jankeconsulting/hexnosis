@@ -172,6 +172,17 @@ void HexFileModel::setColumnHeaders()
     }
 }
 
+QString HexFileModel::fileInfo()
+{
+    QString info = QString();
+    QFileInfo fi(*file);
+    info.append(tr("Name: %1\n").arg(fi.fileName()));
+    info.append(tr("Path: %1\n").arg(fi.path()));
+    info.append(tr("Size: %1\n").arg(filebuffer.size()));
+    info.append(tr("Size: %1\n").arg(fi.size()));
+    return info;
+}
+
 void HexFileModel::updateCursorInfo(QModelIndex current, QModelIndex previous)
 {
     Q_UNUSED(previous);

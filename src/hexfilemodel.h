@@ -41,6 +41,8 @@ public:
         return (file != 0);
     }
 
+    QString fileInfo();
+
 signals:
 
 public slots:
