@@ -525,5 +525,21 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>infoDisplayDockWidget</sender>
+   <signal>visibilityChanged(bool)</signal>
+   <receiver>actionInfoDisplay</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>164</x>
+     <y>458</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
 </ui>
