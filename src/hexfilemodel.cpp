@@ -179,7 +179,6 @@ QString HexFileModel::fileInfo()
     info.append(tr("Name: %1\n").arg(fi.fileName()));
     info.append(tr("Path: %1\n").arg(fi.path()));
     info.append(tr("Size: %1\n").arg(filebuffer.size()));
-    info.append(tr("Size: %1\n").arg(fi.size()));
     return info;
 }
 

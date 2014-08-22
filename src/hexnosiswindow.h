@@ -68,6 +68,7 @@ private:
     AboutDialog *about;
     HexTabWidget *tab;
     static QDockWidget *dataProcessor;
+    QDockWidget *infoDisplay;
     static QLabel *cursorPosition;
     static QLabel *cursorValue;
 

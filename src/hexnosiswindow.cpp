@@ -21,6 +21,8 @@ HexnosisWindow::HexnosisWindow(QWidget *parent) :
     about = new AboutDialog(this, HEXNOSIS_REVISION);
     dataProcessor = ui->dataProcessorDockWidget;
     dataProcessor->setVisible(ui->actionDataProcessor->isChecked());
+    infoDisplay = ui->infoDisplayDockWidget;
+    infoDisplay->setVisible(ui->actionDataProcessor->isChecked());
     setWindowTitle(QString(tr("Hexnosis - Hex Editor")));
     setIconFallbacks();
     enableActions(false);
