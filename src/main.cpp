@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     a.setOrganizationName("Janke Consulting");
     a.setOrganizationDomain("jankeconsulting.ca");
     a.setApplicationName("Hexnosis");
-    a.setApplicationVersion("0.1");
+    a.setApplicationVersion("1.0");
     HexnosisWindow w;
     w.show();
 
