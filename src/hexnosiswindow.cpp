@@ -155,15 +155,23 @@ void HexnosisWindow::setDataProcessorValidators()
 
 void HexnosisWindow::writeSettings()
 {
-    m_settings.beginGroup("main");
+    m_settings.beginGroup("view");
     m_settings.setValue("alternatingRows", ui->actionRowShading->isChecked());
+    m_settings.setValue("charDisplay", ui->actionCharDisplay->isChecked());
+    m_settings.setValue("hexDisplay", ui->actionHexDisplay->isChecked());
+    m_settings.setValue("dataProcessor", ui->actionDataProcessor->isChecked());
+    m_settings.setValue("infoDisplay", ui->actionInfoDisplay->isChecked());
     m_settings.endGroup();
 }
 
 void HexnosisWindow::readSettings()
 {
-    m_settings.beginGroup("main");
+    m_settings.beginGroup("view");
     ui->actionRowShading->setChecked(qvariant_cast<bool>(m_settings.value("alternatingRows")));
+    ui->actionCharDisplay->setChecked(qvariant_cast<bool>(m_settings.value("charDisplay")));
+    ui->actionHexDisplay->setChecked(qvariant_cast<bool>(m_settings.value("hexDisplay")));
+    ui->actionDataProcessor->setChecked(qvariant_cast<bool>(m_settings.value("dataProcessor")));
+    ui->actionInfoDisplay->setChecked(qvariant_cast<bool>(m_settings.value("infoDisplay")));
     m_settings.endGroup();
 }
 
