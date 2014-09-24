@@ -8,7 +8,6 @@ QT       += testlib core
 
 QT       += gui
 
-#TARGET = qxutil tst_qxutiltest
 TARGET = tst_qxutiltest
 CONFIG   += console
 CONFIG   -= app_bundle
