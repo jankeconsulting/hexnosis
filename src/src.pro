@@ -2,7 +2,7 @@
 #
 # Copyright (c) 2014 Ralph Janke. All rights reserved.
 # 
-# Author: Ralph Janke nestle@jankeconsulting.ca
+# Author: Ralph Janke hexnosis@jankeconsulting.ca
 #
 #------------------------------------------------------
 
