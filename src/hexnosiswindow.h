@@ -9,6 +9,7 @@
 
 #include <QMainWindow>
 #include <QApplication>
+#include <QSettings>
 #include <QtGui>
 #include <QLabel>
 #include <QTextBrowser>
@@ -63,6 +64,8 @@ private slots:
 
     void on_editableCheckBox_toggled(bool checked);
 
+    void on_actionQuit_triggered();
+
 private:
     Ui::HexnosisWindow *ui;
     AboutDialog *about;
@@ -71,6 +74,7 @@ private:
     QDockWidget *infoDisplay;
     static QLabel *cursorPosition;
     static QLabel *cursorValue;
+    QSettings m_settings;
 
     QValidator *int8validator;
     QValidator *int16validator;
@@ -86,6 +90,9 @@ private:
 
     void createDataProcessorValidators();
     void setDataProcessorValidators();
+
+    void writeSettings();
+    void readSettings();
 
 public slots:
     static void updateCursorInfo(int offset, int value);

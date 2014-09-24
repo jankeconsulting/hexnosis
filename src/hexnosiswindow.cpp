@@ -14,7 +14,8 @@ QDockWidget *HexnosisWindow::dataProcessor = 0;
 
 HexnosisWindow::HexnosisWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::HexnosisWindow)
+    ui(new Ui::HexnosisWindow),
+    m_settings("Janke Consulting", "Hexnosis")
 {
     findWorkingTheme();
     ui->setupUi(this);
@@ -38,6 +39,7 @@ HexnosisWindow::HexnosisWindow(QWidget *parent) :
     on_editableCheckBox_toggled(ui->editableCheckBox->isChecked());
     createDataProcessorValidators();
     createStatusBar();
+    readSettings();
 }
 
 HexnosisWindow::~HexnosisWindow()
@@ -149,6 +151,20 @@ void HexnosisWindow::setDataProcessorValidators()
     ui->int64Editor->setValidator(int64validator);
     ui->floatEditor->setValidator(floatvalidator);
     ui->doubleEditor->setValidator(doublevalidator);
+}
+
+void HexnosisWindow::writeSettings()
+{
+    m_settings.beginGroup("main");
+    m_settings.setValue("alternatingRows", ui->actionRowShading->isChecked());
+    m_settings.endGroup();
+}
+
+void HexnosisWindow::readSettings()
+{
+    m_settings.beginGroup("main");
+    ui->actionRowShading->setChecked(qvariant_cast<bool>(m_settings.value("alternatingRows")));
+    m_settings.endGroup();
 }
 
 void HexnosisWindow::updateCursorInfo(int offset, int value)
@@ -420,3 +436,8 @@ void HexnosisWindow::on_doubleEditor_editingFinished()
     tab->setTextInCurrentTab(QByteArray().append(cp, sizeof(value)));
 }
 
+
+void HexnosisWindow::on_actionQuit_triggered()
+{
+    writeSettings();
+}
