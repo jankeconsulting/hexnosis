@@ -15,7 +15,7 @@ QDockWidget *HexnosisWindow::dataProcessor = 0;
 HexnosisWindow::HexnosisWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::HexnosisWindow),
-    m_settings("Janke Consulting", "Hexnosis")
+    m_settings()
 {
     findWorkingTheme();
     ui->setupUi(this);
