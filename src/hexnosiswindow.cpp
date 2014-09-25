@@ -134,8 +134,6 @@ void HexnosisWindow::createDataProcessorValidators()
     int8validator = new QIntValidator(-128, 255, this);
     int16validator = new QIntValidator(-32768, 65535, this);
     int32validator = new QxLongValidator(Q_INT64_C(-2147483648), Q_INT64_C(4294967295), this);
-//    int32validator = new QxLongValidator(this);
-//    int64validator = new QxLongValidator(-9223372036854775808, 18446744073709551615, this);
     int64validator = new QxLongValidator(this);
     floatvalidator = new QDoubleValidator;
     doublevalidator = new QDoubleValidator;
