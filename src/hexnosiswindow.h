@@ -42,6 +42,7 @@ private slots:
     void on_actionClose_triggered();
     void on_actionAbout_triggered();
     void on_actionAboutQt_triggered();
+    void on_actionQuit_triggered();
 
     void closeTab(int index);
     void currentTabChanged(int index);
@@ -63,8 +64,6 @@ private slots:
     void on_doubleEditor_editingFinished();
 
     void on_editableCheckBox_toggled(bool checked);
-
-    void on_actionQuit_triggered();
 
 private:
     Ui::HexnosisWindow *ui;
