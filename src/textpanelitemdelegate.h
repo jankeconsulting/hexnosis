@@ -4,18 +4,21 @@
  * Author: Ralph Janke hexnosis@jankeconsulting.ca
  */
 
-#ifndef TEXTPANELITEMDELEGATE_H
-#define TEXTPANELITEMDELEGATE_H
+#ifndef SRC_TEXTPANELITEMDELEGATE_H_
+#define SRC_TEXTPANELITEMDELEGATE_H_
 
 #include <QStyledItemDelegate>
 #include <QString>
 #include <QVariant>
 #include <QLineEdit>
 
+/**
+ * @brief The TextPanelItemDelegate class
+ */
 class TextPanelItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
-public:
+ public:
     explicit TextPanelItemDelegate(QObject *parent = 0);
     QString displayText(const QVariant & value, const QLocale & locale ) const;
     QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
@@ -26,11 +29,10 @@ public:
     void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
                               const QModelIndex &index) const;
 
-signals:
+ signals:
 
-public slots:
+ public slots:
     QString toText(QVariant value) const;
-
 };
 
-#endif // TEXTPANELITEMDELEGATE_H
+#endif  // SRC_TEXTPANELITEMDELEGATE_H_

@@ -4,25 +4,28 @@
  * Author: Ralph Janke hexnosis@jankeconsulting.ca
  */
 
-#ifndef HEXTABWIDGET_H
-#define HEXTABWIDGET_H
+#ifndef SRC_HEXTABWIDGET_H_
+#define SRC_HEXTABWIDGET_H_
 
 #include <QTabWidget>
 #include <QInputDialog>
-#include <tabpanel.h>
+#include <./tabpanel.h>
 
+/**
+ * @brief The HexTabWidget class
+ */
 class HexTabWidget : public QTabWidget
 {
     Q_OBJECT
 
-private:
+ private:
     QString filename;
     QFile *file;
 
     bool chooseFile();
     QString fileName(bool with_path = false);
 
-public:
+ public:
     explicit HexTabWidget(QWidget *parent = 0);
     ~HexTabWidget();
 
@@ -37,11 +40,11 @@ public:
     void setTextPanelVisibility(bool state);
     void setTextInCurrentTab(QByteArray data);
 
-signals:
+ signals:
     void cursorDataChanged(QByteArray data);
 
-public slots:
+ public slots:
     void currentCursorData();
 };
 
-#endif // HEXTABWIDGET_H
+#endif  // SRC_HEXTABWIDGET_H_

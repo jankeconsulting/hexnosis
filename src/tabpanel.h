@@ -4,8 +4,8 @@
  * Author: Ralph Janke hexnosis@jankeconsulting.ca
  */
 
-#ifndef TABPANEL_H
-#define TABPANEL_H
+#ifndef SRC_TABPANEL_H_
+#define SRC_TABPANEL_H_
 
 #include <QWidget>
 #include <QHBoxLayout>
@@ -14,6 +14,9 @@
 #include <./textpanel.h>
 #include <./hexfilemodel.h>
 
+/**
+ * @brief The TabPanel class
+ */
 class TabPanel : public QWidget
 {
     Q_OBJECT
@@ -21,7 +24,7 @@ class TabPanel : public QWidget
     Q_PROPERTY(HexPanel *hexpanel READ hexPanel WRITE setHexPanel)
     Q_PROPERTY(TextPanel *textpanel READ textPanel WRITE setTextPanel)
 
-public:
+ public:
     explicit TabPanel(QWidget *parent = 0, QFile *file = 0);
     ~TabPanel();
 
@@ -30,8 +33,8 @@ public:
     void setAlternatingRowColors(bool state);
     void setHexPanelVisibility(bool state);
     void setTextPanelVisibility(bool state);
-    // QProperty Getters and Setters
 
+    // QProperty Getters and Setters
     void setModel(HexFileModel *model);
     HexFileModel *model();
     void setHexPanel(HexPanel *panel);
@@ -39,14 +42,14 @@ public:
     void setTextPanel(TextPanel *panel);
     TextPanel *textPanel();
 
-signals:
+ signals:
 
-public slots:
+ public slots:
 
-private:
+ private:
     HexPanel *m_hexpanel;
     TextPanel *m_textpanel;
     HexFileModel *m_model;
 };
 
-#endif // TABPANEL_H
+#endif  // SRC_TABPANEL_H_

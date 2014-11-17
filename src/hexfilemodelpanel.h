@@ -4,8 +4,8 @@
  * Author: Ralph Janke hexnosis@jankeconsulting.ca
  */
 
-#ifndef HEXFILEMODELPANEL_H
-#define HEXFILEMODELPANEL_H
+#ifndef SRC_HEXFILEMODELPANEL_H_
+#define SRC_HEXFILEMODELPANEL_H_
 
 #include <QTableView>
 #include <QHeaderView>
@@ -14,19 +14,21 @@
 // TODO: Make height more flexible due to font etc
 #define DEFAULT_ROW_HEIGHT 15
 
+/**
+ * @brief The HexFileModelPanel class
+ */
 class HexFileModelPanel : public QTableView
 {
     Q_OBJECT
-public:
+ public:
     explicit HexFileModelPanel(QWidget *parent = 0);
     ~HexFileModelPanel();
     void calculateMinimumWidth();
 
-signals:
+ signals:
 
-public slots:
+ public slots:
     void setHighlight(QModelIndex index);
-
 };
 
-#endif // HEXFILEMODELPANEL_H
+#endif  // SRC_HEXFILEMODELPANEL_H_

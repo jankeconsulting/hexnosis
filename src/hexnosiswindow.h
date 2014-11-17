@@ -4,8 +4,8 @@
  * Author: Ralph Janke hexnosis@jankeconsulting.ca
  */
 
-#ifndef HEXNOSISWINDOW_H
-#define HEXNOSISWINDOW_H
+#ifndef SRC_HEXNOSISWINDOW_H_
+#define SRC_HEXNOSISWINDOW_H_
 
 #include <QMainWindow>
 #include <QApplication>
@@ -13,8 +13,8 @@
 #include <QtGui>
 #include <QLabel>
 #include <QTextBrowser>
-#include "aboutdialog.h"
-#include "hextabwidget.h"
+#include "./aboutdialog.h"
+#include "./hextabwidget.h"
 #include "lib/qxvalidator.h"
 
 #ifndef HEXNOSIS_REVISION
@@ -22,19 +22,23 @@
 #endif
 
 
-namespace Ui {
+namespace Ui
+{
 class HexnosisWindow;
 }
 
+/**
+ * @brief The HexnosisWindow class
+ */
 class HexnosisWindow : public QMainWindow
 {
     Q_OBJECT
 
-public:
+ public:
     explicit HexnosisWindow(QWidget *parent = 0);
     ~HexnosisWindow();
 
-private slots:
+ private slots:
     void on_actionNew_triggered();
     void on_actionOpen_triggered();
     void on_actionSave_triggered();
@@ -65,7 +69,7 @@ private slots:
 
     void on_editableCheckBox_toggled(bool checked);
 
-private:
+ private:
     Ui::HexnosisWindow *ui;
     AboutDialog *about;
     HexTabWidget *tab;
@@ -93,7 +97,7 @@ private:
     void writeSettings();
     void readSettings();
 
-public slots:
+ public slots:
     static void updateCursorInfo(int offset, int value);
     static void clearCursorInfo();
     void updateDataProcessor(QByteArray data);
@@ -102,5 +106,5 @@ public slots:
     void clearInfoDisplay();
 };
 
-#endif // HEXNOSISWINDOW_H
+#endif  // SRC_HEXNOSISWINDOW_H_
 

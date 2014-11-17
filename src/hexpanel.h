@@ -4,29 +4,32 @@
  * Author: Ralph Janke hexnosis@jankeconsulting.ca
  */
 
-#ifndef HEXPANEL_H
-#define HEXPANEL_H
+#ifndef SRC_HEXPANEL_H_
+#define SRC_HEXPANEL_H_
 
-#include "hexfilemodelpanel.h"
-#include "hexpanelitemdelegate.h"
+#include "./hexfilemodelpanel.h"
+#include "./hexpanelitemdelegate.h"
 
 // TODO: Make width more flexible due to font etc
 #define HEXPANEL_DEFAULT_COLUMN_WIDTH 25
 
+/**
+ * @brief The HexPanel class
+ */
 class HexPanel : public HexFileModelPanel
 {
     Q_OBJECT
-public:
+ public:
     explicit HexPanel(QWidget *parent = 0);
     ~HexPanel();
 
-signals:
+ signals:
 
-public slots:
+ public slots:
 
-private:
+ private:
     void formatPanel();
 
 };
 
-#endif // HEXPANEL_H
+#endif  // SRC_HEXPANEL_H_

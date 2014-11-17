@@ -4,8 +4,8 @@
  * Author: Ralph Janke hexnosis@jankeconsulting.ca
  */
 
-#ifndef HEXFILEMODEL_H
-#define HEXFILEMODEL_H
+#ifndef SRC_HEXFILEMODEL_H_
+#define SRC_HEXFILEMODEL_H_
 
 #include <QStandardItemModel>
 #include <QString>
@@ -14,10 +14,13 @@
 #include <QMessageBox>
 
 //class HexFileModel : public QStandardItemModel
+/**
+ * @brief The HexFileModel class
+ */
 class HexFileModel : public QAbstractTableModel
 {
     Q_OBJECT
-public:
+ public:
     explicit HexFileModel(QObject *parent = 0, QFile *file = 0);
     ~HexFileModel();
 
@@ -43,17 +46,17 @@ public:
 
     QString fileInfo();
 
-signals:
+ signals:
 
-public slots:
+ public slots:
     void updateCursorInfo(QModelIndex current, QModelIndex previousRow);
 
-private:
+ private:
     QFile *file;
     QByteArray filebuffer;
     int tablewidth;
 
-protected slots:
+ protected slots:
 };
 
-#endif // HEXFILEMODEL_H
+#endif  // SRC_HEXFILEMODEL_H_
