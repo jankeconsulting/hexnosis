@@ -24,13 +24,13 @@ class HexFileModel : public QAbstractTableModel
     explicit HexFileModel(QObject *parent = 0, QFile *file = 0);
     ~HexFileModel();
 
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const;
+    int rowCount(const QModelIndex &index = QModelIndex()) const;
+    int columnCount(const QModelIndex &index = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QByteArray data(int length, const QModelIndex &index, int role = Qt::DisplayRole) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
-    bool setData(const QModelIndex & index, const QByteArray & value, int role = Qt::EditRole);
+    bool setData(const QModelIndex & index, const QByteArray & values, int role = Qt::EditRole);
     Qt::ItemFlags flags(const QModelIndex &index) const;
     bool setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role);
 
