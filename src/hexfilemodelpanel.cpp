@@ -4,9 +4,13 @@
  * Author: Ralph Janke hexnosis@jankeconsulting.ca
  */
 
-#include "hexfilemodelpanel.h"
+#include "./hexfilemodelpanel.h"
 #include <QDebug>
 
+/**
+ * @brief constructs the object
+ * @param parent of the object
+ */
 HexFileModelPanel::HexFileModelPanel(QWidget *parent) :
     QTableView(parent)
 {
@@ -20,12 +24,18 @@ HexFileModelPanel::HexFileModelPanel(QWidget *parent) :
     //    connect(this, SIGNAL(entered(QModelIndex)), this, SLOT(setHighlight(QModelIndex)));
 }
 
+/**
+ * @brief destroys the object
+ */
 HexFileModelPanel::~HexFileModelPanel()
 {
     delete itemDelegate();
     delete model();
 }
 
+/**
+ * @brief calculates the minimum width for the panel
+ */
 void HexFileModelPanel::calculateMinimumWidth()
 {
     int total_width = 0;
@@ -42,20 +52,4 @@ void HexFileModelPanel::calculateMinimumWidth()
     if(verticalScrollBarPolicy() == Qt::ScrollBarAlwaysOn || verticalScrollBarPolicy() == Qt::ScrollBarAsNeeded)
         total_width += verticalScrollBar()->sizeHint().width();
     setMinimumWidth(total_width);
-}
-
-void HexFileModelPanel::setHighlight(QModelIndex index)
-{
-//    TODO: Implement code to follow mouse cursor in parallel window
-//#ifdef DEBUG
-//    qDebug() << "HexPanel::setHighlight entered" << index;
-//#endif
-//#ifdef DEBUG
-//    qDebug() << "HexPanel::setHighlight : index->data() = " << index.data(Qt::DisplayRole).toString();
-//#endif
-    if(index.column() < 16) {
-
-    } else {
-
-    }
 }
