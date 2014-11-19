@@ -4,11 +4,14 @@
  * Author: Ralph Janke hexnosis@jankeconsulting.ca
  */
 
-#include "hexpanel.h"
+#include "./hexpanel.h"
+#include "./hexnosiswindow.h"
 #include <QDebug>
-#include "hexnosiswindow.h"
 
-
+/**
+ * @brief constructs the object
+ * @param parent
+ */
 HexPanel::HexPanel(QWidget *parent) :
     HexFileModelPanel(parent)
 {
@@ -17,10 +20,16 @@ HexPanel::HexPanel(QWidget *parent) :
     formatPanel();
 }
 
+/**
+ * @brief destroys the object
+ */
 HexPanel::~HexPanel()
 {
 }
 
+/**
+ * @brief sets format settings for the hexpanel
+ */
 void HexPanel::formatPanel()
 {
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
