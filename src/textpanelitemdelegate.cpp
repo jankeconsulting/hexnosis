@@ -7,6 +7,9 @@
 #include "./textpanelitemdelegate.h"
 #include <QDebug>
 
+// TODO(txwikinger): Investigate merging of some functionality
+//                   with HexpanelItemDelegate for DRY principle
+
 /**
  * @brief constructs the object
  * @param parent of the object
