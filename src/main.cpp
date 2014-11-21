@@ -4,9 +4,19 @@
  * Author: Ralph Janke hexnosis@jankeconsulting.ca
  */
 
-#include "hexnosiswindow.h"
 #include <QApplication>
+#include "./hexnosiswindow.h"
 
+/**
+ * @fn main
+ * @brief the main function of the executable
+ * @param argc
+ * @param argv
+ * @return the error code for the exit of the application
+ *
+ * It sets application wide settings, launces the main window
+ * and executes the main loop.
+ */
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
