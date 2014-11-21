@@ -4,15 +4,25 @@
  * Author: Ralph Janke hexnosis@jankeconsulting.ca
  */
 
-#include "hextabwidget.h"
+#include "./hextabwidget.h"
 #include <QDebug>
 
+/**
+ * @brief constructs the object
+ * @param parent of the object
+ */
 HexTabWidget::HexTabWidget(QWidget *parent) :
     QTabWidget(parent)
 {
     connect(this, SIGNAL(currentChanged(int)), this, SLOT(currentCursorData()));
 }
 
+/**
+ * @brief destroys the object
+ *
+ * All the tab widgets inside this panel are deleted before the object
+ * is destroyed
+ */
 HexTabWidget::~HexTabWidget()
 {
     for (int i = 0; i < count(); i++) {
@@ -20,6 +30,12 @@ HexTabWidget::~HexTabWidget()
     }
 }
 
+/**
+ * @brief adds another tab for a file to the panel
+ * @param page - the tab widget
+ * @param tabname - name inside the tab
+ * @param tabhint - the tooltip for the tab
+ */
 void HexTabWidget::addTabPage(TabPanel *page, QString tabname, QString tabhint)
 {
     addTab(page, tabname);
@@ -29,6 +45,12 @@ void HexTabWidget::addTabPage(TabPanel *page, QString tabname, QString tabhint)
     connect(page->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(currentCursorData()));
 }
 
+/**
+ * @brief creates a new file for the hexeditor
+ *
+ * A dialog is opened asking for the size of the file. The
+ * file is created and added to the tabs.
+ */
 void HexTabWidget::createFile()
 {
     bool ok;
@@ -40,6 +62,12 @@ void HexTabWidget::createFile()
     }
 }
 
+/**
+ * @brief opens a file for the hexeditor
+ *
+ * The new widget is ceated after the file is selected
+ * from a file selector dialog and is added to the tabs.
+ */
 void HexTabWidget::openFile()
 {
     if(chooseFile()) {
@@ -48,17 +76,27 @@ void HexTabWidget::openFile()
     }
 }
 
+/**
+ * @brief saves the currently used file
+ */
 void HexTabWidget::saveFile()
 {
     qobject_cast<TabPanel *>(currentWidget())->saveFile(fileName(true));
 }
 
+/**
+ * @brief saves the currently used file as a particular name and path
+ */
 void HexTabWidget::saveFileAs()
 {
     if(chooseFile())
         qobject_cast<TabPanel *>(currentWidget())->saveFile(fileName(true));
 }
 
+/**
+ * @brief sets the flag for alternating row colors for all models in the tabs
+ * @param state - true if alternating row colors are used, otherwise false
+ */
 void HexTabWidget::setAlternatingRowColors(bool state)
 {
     for (int i = 0; i < count(); i++) {
@@ -67,6 +105,10 @@ void HexTabWidget::setAlternatingRowColors(bool state)
     }
 }
 
+/**
+ * @brief sets the visibility of the hexpanels in all the tabs
+ * @param state - true if hexpanels are visible, otherwise false
+ */
 void HexTabWidget::setHexPanelVisibility(bool state)
 {
     for (int i = 0; i < count(); i++) {
@@ -75,6 +117,10 @@ void HexTabWidget::setHexPanelVisibility(bool state)
     }
 }
 
+/**
+ * @brief sets the visibility of the textpanels in all the tabs
+ * @param state - true if textpanels are visible, otherwise false
+ */
 void HexTabWidget::setTextPanelVisibility(bool state)
 {
     for (int i = 0; i < count(); i++) {
@@ -83,6 +129,10 @@ void HexTabWidget::setTextPanelVisibility(bool state)
     }
 }
 
+/**
+ * @brief sets provided data in the model of the current tab
+ * @param data
+ */
 void HexTabWidget::setTextInCurrentTab(QByteArray data)
 {
     if(count() > 0) {
@@ -91,6 +141,9 @@ void HexTabWidget::setTextInCurrentTab(QByteArray data)
     }
 }
 
+/**
+ * @brief slot that is called when data under the cursor is changed
+ */
 void HexTabWidget::currentCursorData()
 {
     if(count() > 0) {
@@ -100,6 +153,10 @@ void HexTabWidget::currentCursorData()
     }
 }
 
+/**
+ * @brief opens file dialog for selecting a file and opens it
+ * @return true if successful, otherwise false
+ */
 bool HexTabWidget::chooseFile()
 {
 //    TODO: possibly refactor file parts to model (or own file class) - keep UI part in this class
@@ -116,6 +173,11 @@ bool HexTabWidget::chooseFile()
     return true;
 }
 
+/**
+ * @brief returns filename
+ * @param with_path - indicated if only filename or full path is requested
+ * @return
+ */
 QString HexTabWidget::fileName(bool with_path)
 {
     if(with_path) {
