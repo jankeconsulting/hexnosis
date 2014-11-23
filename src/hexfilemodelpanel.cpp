@@ -40,7 +40,8 @@ void HexFileModelPanel::calculateMinimumWidth()
 {
     int total_width = 0;
     int column_width = 0;
-    for(int i = 0; i< model()->columnCount(); i++) {
+    for (int i = 0; i< model()->columnCount(); i++)
+    {
         column_width += columnWidth(i);
     }
     total_width += column_width;
@@ -49,7 +50,10 @@ void HexFileModelPanel::calculateMinimumWidth()
         total_width += verticalHeader()->width();
 //    TODO: ideally there needs to be a change when scrollbar is hidden or shown
 //    if(verticalScrollBar()->isVisible())
-    if(verticalScrollBarPolicy() == Qt::ScrollBarAlwaysOn || verticalScrollBarPolicy() == Qt::ScrollBarAsNeeded)
+    if (verticalScrollBarPolicy() == Qt::ScrollBarAlwaysOn ||
+            verticalScrollBarPolicy() == Qt::ScrollBarAsNeeded)
+    {
         total_width += verticalScrollBar()->sizeHint().width();
+    }
     setMinimumWidth(total_width);
 }
