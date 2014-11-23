@@ -107,4 +107,3 @@ class HexnosisWindow : public QMainWindow
 };
 
 #endif  // SRC_HEXNOSISWINDOW_H_
-

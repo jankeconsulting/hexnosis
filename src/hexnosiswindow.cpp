@@ -37,7 +37,8 @@ HexnosisWindow::HexnosisWindow(QWidget *parent) :
     this->setCentralWidget(tab);
     connect(tab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
     connect(tab, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
-    connect(tab, SIGNAL(cursorDataChanged(QByteArray)), this, SLOT(updateDataProcessor(QByteArray)));
+    connect(tab, SIGNAL(cursorDataChanged(QByteArray)), this,
+            SLOT(updateDataProcessor(QByteArray)));
     connect(ui->unsignedCheckBox, SIGNAL(toggled(bool)), tab, SLOT(currentCursorData()));
     connect(ui->bigEndianCheckBox, SIGNAL(toggled(bool)), tab, SLOT(currentCursorData()));
     on_editableCheckBox_toggled(ui->editableCheckBox->isChecked());
@@ -95,7 +96,7 @@ void HexnosisWindow::currentTabChanged(int index)
     {
         enableActions(true);
         TabPanel *tabpanel = qobject_cast<TabPanel *>(tab->currentWidget());
-        if (!tabpanel->model()->hasFile())
+        if (not(tabpanel->model()->hasFile()))
         {
             ui->actionSave->setEnabled(false);
         }
@@ -128,24 +129,28 @@ void HexnosisWindow::enableActions(bool enable)
 void HexnosisWindow::findWorkingTheme()
 {
 //    TODO: Needs rework for DRY
-    if(QIcon::hasThemeIcon("application-exit")
+    if (QIcon::hasThemeIcon("application-exit")
             && QIcon::hasThemeIcon("document-new")
             && QIcon::hasThemeIcon("document-open")
             && QIcon::hasThemeIcon("document-save")
             && QIcon::hasThemeIcon("document-save-as")
             && QIcon::hasThemeIcon("document-close")
-            )
+        )
+    {
         return;
+    }
 
     QIcon::setThemeName("oxygen");
-    if(QIcon::hasThemeIcon("application-exit")
+    if (QIcon::hasThemeIcon("application-exit")
             && QIcon::hasThemeIcon("document-new")
             && QIcon::hasThemeIcon("document-open")
             && QIcon::hasThemeIcon("document-save")
             && QIcon::hasThemeIcon("document-save-as")
             && QIcon::hasThemeIcon("document-close")
-            )
+       )
+    {
         return;
+    }
 }
 
 /**
@@ -154,16 +159,26 @@ void HexnosisWindow::findWorkingTheme()
 void HexnosisWindow::setIconFallbacks()
 {
 //    TODO: Needs rework for DRY
-    if(!QIcon::hasThemeIcon("document-close"))
+    if (not(QIcon::hasThemeIcon("document-close")))
+    {
         ui->actionClose->setIcon(this->style()->standardIcon(QStyle::SP_DialogCloseButton));
-    if(!QIcon::hasThemeIcon("document-open"))
+    }
+    if (not(QIcon::hasThemeIcon("document-open")))
+    {
         ui->actionOpen->setIcon(this->style()->standardIcon(QStyle::SP_DialogOpenButton));
-    if(!QIcon::hasThemeIcon("document-save"))
+    }
+    if (not(QIcon::hasThemeIcon("document-save")))
+    {
         ui->actionOpen->setIcon(this->style()->standardIcon(QStyle::SP_DialogSaveButton));
-    if(!QIcon::hasThemeIcon("document-save-as"))
+    }
+    if (not(QIcon::hasThemeIcon("document-save-as")))
+    {
         ui->actionOpen->setIcon(this->style()->standardIcon(QStyle::SP_DialogSaveButton));
-    if(!QIcon::hasThemeIcon("document-new"))
+    }
+    if (not(QIcon::hasThemeIcon("document-new")))
+    {
         ui->actionNew->setIcon(this->style()->standardIcon(QStyle::SP_FileDialogStart));
+    }
 }
 
 /**
@@ -238,10 +253,14 @@ void HexnosisWindow::updateCursorInfo(int offset, int value)
  */
 void HexnosisWindow::clearCursorInfo()
 {
-    if(cursorPosition)
+    if (cursorPosition)
+    {
         cursorPosition->clear();
-    if(cursorValue)
+    }
+    if (cursorValue)
+    {
         cursorValue->clear();
+    }
 }
 
 /**
@@ -282,7 +301,8 @@ void HexnosisWindow::updateDataProcessor(QByteArray data)
     QString bitBytes = QString("");
     for (int i = 7; i >= 0; i--)
     {
-        if (1 << i & data[0]) {
+        if (1 << i & data[0])
+        {
             bitBytes.append("1");
         }
         else
@@ -414,7 +434,8 @@ void HexnosisWindow::createStatusBar()
  * @brief provides the state for row shading
  * @return true if row shading is enable, otherwise false
  */
-bool HexnosisWindow::rowShadingState() {
+bool HexnosisWindow::rowShadingState()
+{
     return ui->actionRowShading->isChecked();
 }
 
@@ -479,13 +500,13 @@ void HexnosisWindow::on_actionCharDisplay_toggled(bool state)
  */
 void HexnosisWindow::on_editableCheckBox_toggled(bool checked)
 {
-    ui->binaryEditor->setReadOnly(!checked);
-    ui->int8Editor->setReadOnly(!checked);
-    ui->int16Editor->setReadOnly(!checked);
-    ui->int32Editor->setReadOnly(!checked);
-    ui->int64Editor->setReadOnly(!checked);
-    ui->floatEditor->setReadOnly(!checked);
-    ui->doubleEditor->setReadOnly(!checked);
+    ui->binaryEditor->setReadOnly(not(checked));
+    ui->int8Editor->setReadOnly(not(checked));
+    ui->int16Editor->setReadOnly((not(!checked));
+    ui->int32Editor->setReadOnly((not(!checked));
+    ui->int64Editor->setReadOnly(not(checked));
+    ui->floatEditor->setReadOnly(not(checked));
+    ui->doubleEditor->setReadOnly(not(checked));
 }
 
 /**
@@ -527,7 +548,7 @@ void HexnosisWindow::on_int16Editor_editingFinished()
     short value = ui->int16Editor->text().toShort(&ok);
     // need to use void* in order to allow both short and ushort being possible
     void *p = &value;
-    if (!ok)
+    if (not(ok))
     {
         ushort value = ui->int16Editor->text().toUShort(&ok);
         p = &value;
@@ -548,7 +569,7 @@ void HexnosisWindow::on_int32Editor_editingFinished()
     int value = ui->int32Editor->text().toInt(&ok);
     // need to use void* in order to allow both int and uint being possible
     void *p = &value;
-    if (!ok)
+    if (not(ok))
     {
         uint value = ui->int32Editor->text().toUInt(&ok);
         p = &value;
