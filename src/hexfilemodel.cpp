@@ -282,7 +282,7 @@ bool HexFileModel::saveDatatoFile(QString file_name, int length, int offset)
     Q_UNUSED(length);
     Q_UNUSED(offset);
 
-    if (!file_name.isEmpty())
+    if (not(file_name.isEmpty()))
     {
         file = new QFile(file_name);
 
@@ -315,7 +315,7 @@ void HexFileModel::createBuffer(int len, char fillchar)
  */
 void HexFileModel::setColumnHeaders()
 {
-    for(int i=0; i<16; i++)
+    for (int i=0; i<16; i++)
     {
 //        QStandardItem *item = new QStandardItem(QString().number(i,16).toUpper());
         //setHorizontalHeaderItem(i, item);
@@ -351,7 +351,8 @@ void HexFileModel::updateCursorInfo(QModelIndex current, QModelIndex previous)
     Q_UNUSED(previous);
     if (current.isValid())
     {
-        HexnosisWindow::updateCursorInfo(current.row()*columnCount()+current.column(), data(current, Qt::DisplayRole).toInt());
+        HexnosisWindow::updateCursorInfo(current.row()*columnCount()+current.column(),
+                                         data(current, Qt::DisplayRole).toInt());
     }
     else
     {

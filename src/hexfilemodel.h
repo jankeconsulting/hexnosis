@@ -40,7 +40,8 @@ class HexFileModel : public QAbstractTableModel
     void setColumnHeaders();
 
     QString fileName(bool with_path = false);
-    bool hasFile() {
+    bool hasFile()
+    {
         return (file != 0);
     }
 
