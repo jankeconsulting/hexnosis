@@ -162,20 +162,20 @@ bool HexFileModel::setData(const QModelIndex &index, const QVariant &value, int 
 bool HexFileModel::setData(const QModelIndex &index, const QByteArray &values, int role)
 {
     QModelIndex index2;
-    if ((index.column() + value.size()) < columnCount())
+    if ((index.column() + values.size()) < columnCount())
     {
-        index2 = QAbstractItemModel::createIndex(index.row(), index.column()+value.size()-1);
+        index2 = QAbstractItemModel::createIndex(index.row(), index.column()+values.size()-1);
     }
     else
     {
-        int row = (index.row() + (value.size() / tablewidth)) + 1;
-        int column = (index.column()+value.size()-1) % tablewidth;
+        int row = (index.row() + (values.size() / tablewidth)) + 1;
+        int column = (index.column()+values.size()-1) % tablewidth;
         index2 = QAbstractItemModel::createIndex(row, column);
     }
 
     if (index.isValid() && role == Qt::EditRole)
     {
-        filebuffer.replace(index.row()*columnCount()+index.column(), value.size(), value);
+        filebuffer.replace(index.row()*columnCount()+index.column(), values.size(), values);
         emit dataChanged(index, index2);
         return true;
     }
