@@ -42,7 +42,8 @@ QString TextPanelItemDelegate::displayText(const QVariant &value, const QLocale 
  *
  * This method is re-implemented
  */
-QWidget *TextPanelItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
+QWidget *TextPanelItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option,
+                                             const QModelIndex &index) const
 {
     Q_UNUSED(option);
     Q_UNUSED(index);
@@ -74,7 +75,8 @@ void TextPanelItemDelegate::setEditorData(QWidget *editor, const QModelIndex &in
  *
  * This method is re-implemented
  */
-void TextPanelItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
+void TextPanelItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
+                                         const QModelIndex &index) const
 {
     QLineEdit *lineeditor = qobject_cast<QLineEdit *>(editor);
     model->setData(index, lineeditor->text().toLatin1(), Qt::EditRole);
@@ -88,7 +90,9 @@ void TextPanelItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *mo
  *
  * This method is re-implemented
  */
-void TextPanelItemDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void TextPanelItemDelegate::updateEditorGeometry(QWidget *editor,
+                                                 const QStyleOptionViewItem &option,
+                                                 const QModelIndex &index) const
 {
     Q_UNUSED(index);
     editor->setGeometry(option.rect);
