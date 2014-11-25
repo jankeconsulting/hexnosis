@@ -42,7 +42,8 @@ QString HexPanelItemDelegate::displayText(const QVariant &value, const QLocale &
  *
  * This method is re-implemented
  */
-QWidget *HexPanelItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
+QWidget *HexPanelItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option,
+                                            const QModelIndex &index) const
 {
     Q_UNUSED(option);
     Q_UNUSED(index);
@@ -75,7 +76,8 @@ void HexPanelItemDelegate::setEditorData(QWidget *editor, const QModelIndex &ind
  *
  * This method is re-implemented
  */
-void HexPanelItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
+void HexPanelItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
+                                        const QModelIndex &index) const
 {
     QLineEdit *lineeditor = qobject_cast<QLineEdit *>(editor);
     model->setData(index, QByteArray::fromHex(lineeditor->text().toLatin1()), Qt::EditRole);
@@ -89,7 +91,9 @@ void HexPanelItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *mod
  *
  * This method is re-implemented
  */
-void HexPanelItemDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void HexPanelItemDelegate::updateEditorGeometry(QWidget *editor,
+                                                const QStyleOptionViewItem &option,
+                                                const QModelIndex &index) const
 {
     Q_UNUSED(index);
     editor->setGeometry(option.rect);
