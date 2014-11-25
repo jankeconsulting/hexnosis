@@ -502,8 +502,8 @@ void HexnosisWindow::on_editableCheckBox_toggled(bool checked)
 {
     ui->binaryEditor->setReadOnly(not(checked));
     ui->int8Editor->setReadOnly(not(checked));
-    ui->int16Editor->setReadOnly((not(!checked));
-    ui->int32Editor->setReadOnly((not(!checked));
+    ui->int16Editor->setReadOnly(not(checked));
+    ui->int32Editor->setReadOnly(not(checked));
     ui->int64Editor->setReadOnly(not(checked));
     ui->floatEditor->setReadOnly(not(checked));
     ui->doubleEditor->setReadOnly(not(checked));
