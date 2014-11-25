@@ -25,7 +25,8 @@ HexTabWidget::HexTabWidget(QWidget *parent) :
  */
 HexTabWidget::~HexTabWidget()
 {
-    for (int i = 0; i < count(); i++) {
+    for (int i = 0; i < count(); i++)
+    {
         delete widget(i);
     }
 }
@@ -41,8 +42,10 @@ void HexTabWidget::addTabPage(TabPanel *page, QString tabname, QString tabhint)
     addTab(page, tabname);
     setTabToolTip(indexOf(page), tabhint);
     setCurrentWidget(page);
-    connect(page->hexPanel()->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(currentCursorData()));
-    connect(page->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(currentCursorData()));
+    connect(page->hexPanel()->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)),
+            this, SLOT(currentCursorData()));
+    connect(page->model(), SIGNAL(dataChanged(QModelIndex, QModelIndex)),
+            this, SLOT(currentCursorData()));
 }
 
 /**
@@ -54,8 +57,11 @@ void HexTabWidget::addTabPage(TabPanel *page, QString tabname, QString tabhint)
 void HexTabWidget::createFile()
 {
     bool ok;
-    int len = QInputDialog::getInt(this, QString(tr("Enter File Size")), QString(tr("Please enter file length")), 1, 1, 2147483647, 1, &ok);
-    if(ok) {
+    int len = QInputDialog::getInt(this, QString(tr("Enter File Size")),
+                                   QString(tr("Please enter file length")),
+                                   1, 1, 2147483647, 1, &ok);
+    if (ok)
+    {
         TabPanel *page = new TabPanel(this, 0);
         page->createFile(len, 0);
         addTabPage(page);
@@ -70,7 +76,8 @@ void HexTabWidget::createFile()
  */
 void HexTabWidget::openFile()
 {
-    if(chooseFile()) {
+    if (chooseFile())
+    {
         TabPanel *page = new TabPanel(this, file);
         addTabPage(page, fileName(), filename);
     }
@@ -89,8 +96,10 @@ void HexTabWidget::saveFile()
  */
 void HexTabWidget::saveFileAs()
 {
-    if(chooseFile())
+    if (chooseFile())
+    {
         qobject_cast<TabPanel *>(currentWidget())->saveFile(fileName(true));
+    }
 }
 
 /**
@@ -99,7 +108,8 @@ void HexTabWidget::saveFileAs()
  */
 void HexTabWidget::setAlternatingRowColors(bool state)
 {
-    for (int i = 0; i < count(); i++) {
+    for (int i = 0; i < count(); i++)
+    {
         QWidget* w = widget(i);
         qobject_cast<TabPanel *>(w)->setAlternatingRowColors(state);
     }
@@ -111,7 +121,8 @@ void HexTabWidget::setAlternatingRowColors(bool state)
  */
 void HexTabWidget::setHexPanelVisibility(bool state)
 {
-    for (int i = 0; i < count(); i++) {
+    for (int i = 0; i < count(); i++)
+    {
         QWidget* w = widget(i);
         qobject_cast<TabPanel *>(w)->setHexPanelVisibility(state);
     }
@@ -123,7 +134,8 @@ void HexTabWidget::setHexPanelVisibility(bool state)
  */
 void HexTabWidget::setTextPanelVisibility(bool state)
 {
-    for (int i = 0; i < count(); i++) {
+    for (int i = 0; i < count(); i++)
+    {
         QWidget* w = widget(i);
         qobject_cast<TabPanel *>(w)->setTextPanelVisibility(state);
     }
@@ -135,7 +147,8 @@ void HexTabWidget::setTextPanelVisibility(bool state)
  */
 void HexTabWidget::setTextInCurrentTab(QByteArray data)
 {
-    if(count() > 0) {
+    if (count() > 0)
+    {
         TabPanel *tabwidget = qobject_cast<TabPanel *>(currentWidget());
         tabwidget->model()->setData(tabwidget->hexPanel()->currentIndex(), data, Qt::EditRole);
     }
@@ -146,9 +159,11 @@ void HexTabWidget::setTextInCurrentTab(QByteArray data)
  */
 void HexTabWidget::currentCursorData()
 {
-    if(count() > 0) {
+    if (count() > 0)
+    {
         TabPanel *tabwidget = qobject_cast<TabPanel *>(currentWidget());
-        QByteArray bytes = tabwidget->model()->data(8, tabwidget->hexPanel()->currentIndex(), Qt::DisplayRole);
+        QByteArray bytes = tabwidget->model()->data(8, tabwidget->hexPanel()->currentIndex(),
+                                                    Qt::DisplayRole);
         emit cursorDataChanged(bytes);
     }
 }
@@ -161,11 +176,15 @@ bool HexTabWidget::chooseFile()
 {
 //    TODO: possibly refactor file parts to model (or own file class) - keep UI part in this class
     filename = QFileDialog::getOpenFileName(this, tr("Open File"), QString());
-    if(filename.isNull())
+    if (filename.isNull())
+    {
         return false;
-    if (!filename.isEmpty()) {
+    }
+    if (not(filename.isEmpty()))
+    {
         file = new QFile(filename);
-        if (!file->open(QIODevice::ReadOnly)) {
+        if (not(file->open(QIODevice::ReadOnly)))
+        {
             QMessageBox::critical(this, tr("Error"), tr("Could not open file"));
             return false;
         }
@@ -180,9 +199,11 @@ bool HexTabWidget::chooseFile()
  */
 QString HexTabWidget::fileName(bool with_path)
 {
-    if(with_path) {
+    if (with_path)
+    {
         return filename;
-    } else {
+    } else
+    {
         return QFileInfo(filename).fileName();
     }
 }
