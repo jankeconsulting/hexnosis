@@ -28,7 +28,8 @@ TabPanel::TabPanel(QWidget *parent, QFile *file) :
     layout->addStretch();
     setLayout(layout);
 
-    if(file) {
+    if (file)
+    {
         model()->loadDatafromFile();
     }
 
@@ -36,11 +37,13 @@ TabPanel::TabPanel(QWidget *parent, QFile *file) :
     textpanel->setModel(model());
 
     textpanel->setSelectionModel(hexpanel->selectionModel());
-    connect(textpanel->verticalScrollBar(), SIGNAL(valueChanged(int)), hexpanel->verticalScrollBar(), SLOT(setValue(int)));
+    connect(textpanel->verticalScrollBar(), SIGNAL(valueChanged(int)),
+            hexpanel->verticalScrollBar(), SLOT(setValue(int)));
 
     hexpanel->calculateMinimumWidth();
     textpanel->calculateMinimumWidth();
-    connect(hexpanel->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), model(), SLOT(updateCursorInfo(QModelIndex, QModelIndex)));
+    connect(hexpanel->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)),
+            model(), SLOT(updateCursorInfo(QModelIndex, QModelIndex)));
 
 }
 
@@ -106,10 +109,14 @@ void TabPanel::setHexPanelVisibility(bool state)
 void TabPanel::setTextPanelVisibility(bool state)
 {
     textPanel()->setVisible(state);
-    if(state)
+    if (state)
+    {
         hexPanel()->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    }
     else
+    {
         hexPanel()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    }
     hexPanel()->calculateMinimumWidth();
 }
 
@@ -117,7 +124,8 @@ void TabPanel::setTextPanelVisibility(bool state)
  * @brief sets the model for this tab
  * @param model
  */
-void TabPanel::setModel(HexFileModel *model) {
+void TabPanel::setModel(HexFileModel *model)
+{
     m_model = model;
 }
 
@@ -125,7 +133,8 @@ void TabPanel::setModel(HexFileModel *model) {
  * @brief provides the model for the tab
  * @return the model
  */
-HexFileModel *TabPanel::model() {
+HexFileModel *TabPanel::model()
+{
     return m_model;
 }
 
@@ -133,7 +142,8 @@ HexFileModel *TabPanel::model() {
  * @brief sets the hexpanel for the tab
  * @param panel
  */
-void TabPanel::setHexPanel(HexPanel *panel) {
+void TabPanel::setHexPanel(HexPanel *panel)
+{
     m_hexpanel = panel;
 }
 
@@ -141,7 +151,8 @@ void TabPanel::setHexPanel(HexPanel *panel) {
  * @brief returns the hexpanel of the tab
  * @return hexpanel
  */
-HexPanel *TabPanel::hexPanel() {
+HexPanel *TabPanel::hexPanel()
+{
     return m_hexpanel;
 }
 
@@ -149,7 +160,8 @@ HexPanel *TabPanel::hexPanel() {
  * @brief sets the textpanel for the tab
  * @param panel
  */
-void TabPanel::setTextPanel(TextPanel *panel) {
+void TabPanel::setTextPanel(TextPanel *panel)
+{
     m_textpanel = panel;
 }
 
@@ -157,6 +169,7 @@ void TabPanel::setTextPanel(TextPanel *panel) {
  * @brief returns the textpanel of the tab
  * @return textpanel
  */
-TextPanel *TabPanel::textPanel() {
+TextPanel *TabPanel::textPanel()
+{
     return m_textpanel;
 }
