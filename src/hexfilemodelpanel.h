@@ -28,7 +28,6 @@ class HexFileModelPanel : public QTableView
  signals:
 
  public slots:
-    void setHighlight(QModelIndex index);
 };
 
 #endif  // SRC_HEXFILEMODELPANEL_H_
