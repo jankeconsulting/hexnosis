@@ -19,8 +19,8 @@ class HexPanelItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
  public:
-    HexPanelItemDelegate(QObject* parent = 0);
-    QString displayText(const QVariant & value, const QLocale & locale ) const;
+    explicit HexPanelItemDelegate(QObject* parent = 0);
+    QString displayText(const QVariant & value, const QLocale & locale) const;
     QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
                           const QModelIndex &index) const;
     void setEditorData(QWidget *editor, const QModelIndex &index) const;

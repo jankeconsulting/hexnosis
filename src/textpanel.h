@@ -10,7 +10,7 @@
 #include "./hexfilemodelpanel.h"
 #include "./textpanelitemdelegate.h"
 
-// TODO: Make width more flexible due to font etc
+// TODO(txwikinger): Make width more flexible due to font etc
 #define TEXTPANEL_DEFAULT_COLUMN_WIDTH 13
 
 /**
