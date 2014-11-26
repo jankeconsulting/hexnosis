@@ -10,7 +10,7 @@
 #include "./hexfilemodelpanel.h"
 #include "./hexpanelitemdelegate.h"
 
-// TODO: Make width more flexible due to font etc
+// TODO(txwiknger): Make width more flexible due to font etc
 #define HEXPANEL_DEFAULT_COLUMN_WIDTH 25
 
 /**
@@ -29,7 +29,6 @@ class HexPanel : public HexFileModelPanel
 
  private:
     void formatPanel();
-
 };
 
 #endif  // SRC_HEXPANEL_H_

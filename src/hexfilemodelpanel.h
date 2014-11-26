@@ -11,7 +11,7 @@
 #include <QHeaderView>
 #include <QScrollBar>
 
-// TODO: Make height more flexible due to font etc
+// TODO(txwikinger): Make height more flexible due to font etc
 #define DEFAULT_ROW_HEIGHT 15
 
 /**
