@@ -4,9 +4,9 @@
  * Author: Ralph Janke hexnosis@jankeconsulting.ca
  */
 
+#include <QDebug>
 #include "./hexnosiswindow.h"
 #include "./hexfilemodel.h"
-#include <QDebug>
 
 /**
  * @brief constructs the model for the views
@@ -46,9 +46,7 @@ int HexFileModel::rowCount(const QModelIndex & /* index */) const
     if ((filebuffer.size() / tablewidth) * tablewidth == filebuffer.size())
     {
         return filebuffer.size() / tablewidth;
-    }
-    else
-    {
+    } else {
         return (filebuffer.size() / tablewidth) + 1;
     }
 }
@@ -104,7 +102,7 @@ QVariant HexFileModel::data(const QModelIndex &index, int role) const
  * length combination would reach over the end of the file,
  * the return QByteArray will be shorten than length.
  */
-QByteArray HexFileModel::data( int length, const QModelIndex &index, int role) const
+QByteArray HexFileModel::data(int length, const QModelIndex &index, int role) const
 {
     if (not(index.isValid()) || (role != Qt::DisplayRole))
     {
@@ -121,7 +119,7 @@ QByteArray HexFileModel::data( int length, const QModelIndex &index, int role) c
     }
     QByteArray data = QByteArray();
     data.resize(length);
-    for (int i=0; i<length; i++)
+    for (int i = 0; i < length; i++)
     {
         data[i] = filebuffer.at(index.row()*columnCount()+index.column()+i);
     }
@@ -165,9 +163,7 @@ bool HexFileModel::setData(const QModelIndex &index, const QByteArray &values, i
     if ((index.column() + values.size()) < columnCount())
     {
         index2 = QAbstractItemModel::createIndex(index.row(), index.column()+values.size()-1);
-    }
-    else
-    {
+    } else {
         int row = (index.row() + (values.size() / tablewidth)) + 1;
         int column = (index.column()+values.size()-1) % tablewidth;
         index2 = QAbstractItemModel::createIndex(row, column);
@@ -232,7 +228,7 @@ QVariant HexFileModel::headerData(int section, Qt::Orientation orientation, int 
 {
     if (role == Qt::DisplayRole)
     {
-//        TODO: Should representation of header be located in Delegate?
+// TODO(txwikinger): Should representation of header be located in Delegate?
         if (orientation == Qt::Horizontal)
         {
             return QString("%1").arg(QByteArray(1, section).toHex().toUpper().data()[1]);
@@ -315,11 +311,11 @@ void HexFileModel::createBuffer(int len, char fillchar)
  */
 void HexFileModel::setColumnHeaders()
 {
-    for (int i=0; i<16; i++)
+    for (int i = 0; i < 16; i++)
     {
-//        QStandardItem *item = new QStandardItem(QString().number(i,16).toUpper());
-        //setHorizontalHeaderItem(i, item);
-        //setHorizontalHeaderItem(i+16, item);
+        // QStandardItem *item = new QStandardItem(QString().number(i,16).toUpper());
+        // setHorizontalHeaderItem(i, item);
+        // setHorizontalHeaderItem(i+16, item);
     }
 }
 
@@ -353,9 +349,7 @@ void HexFileModel::updateCursorInfo(QModelIndex current, QModelIndex previous)
     {
         HexnosisWindow::updateCursorInfo(current.row()*columnCount()+current.column(),
                                          data(current, Qt::DisplayRole).toInt());
-    }
-    else
-    {
+    } else {
         HexnosisWindow::clearCursorInfo();
     }
 }
