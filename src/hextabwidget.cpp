@@ -174,7 +174,7 @@ void HexTabWidget::currentCursorData()
  */
 bool HexTabWidget::chooseFile()
 {
-//    TODO: possibly refactor file parts to model (or own file class) - keep UI part in this class
+// TODO(txwikinger): possibly refactor file parts to model (or own file class) - keep UI part in this class
     filename = QFileDialog::getOpenFileName(this, tr("Open File"), QString());
     if (filename.isNull())
     {
@@ -202,8 +202,7 @@ QString HexTabWidget::fileName(bool with_path)
     if (with_path)
     {
         return filename;
-    } else
-    {
+    } else {
         return QFileInfo(filename).fileName();
     }
 }
