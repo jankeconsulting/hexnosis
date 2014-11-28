@@ -44,7 +44,6 @@ TabPanel::TabPanel(QWidget *parent, QFile *file) :
     textpanel->calculateMinimumWidth();
     connect(hexpanel->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)),
             model(), SLOT(updateCursorInfo(QModelIndex, QModelIndex)));
-
 }
 
 /**
@@ -112,9 +111,7 @@ void TabPanel::setTextPanelVisibility(bool state)
     if (state)
     {
         hexPanel()->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    }
-    else
-    {
+    } else {
         hexPanel()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     }
     hexPanel()->calculateMinimumWidth();
