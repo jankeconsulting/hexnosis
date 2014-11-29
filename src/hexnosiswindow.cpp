@@ -156,7 +156,7 @@ void HexnosisWindow::findWorkingTheme()
  */
 void HexnosisWindow::setIconFallbacks()
 {
-//    TODO: Needs rework for DRY
+// TODO(txwikinger): Needs rework for DRY
     if (not(QIcon::hasThemeIcon("document-close")))
     {
         ui->actionClose->setIcon(this->style()->standardIcon(QStyle::SP_DialogCloseButton));
