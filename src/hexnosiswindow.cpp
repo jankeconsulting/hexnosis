@@ -103,9 +103,7 @@ void HexnosisWindow::currentTabChanged(int index)
         QModelIndex index = tabpanel->hexPanel()->selectionModel()->currentIndex();
         tabpanel->model()->updateCursorInfo(index, index);
         updateInfoDisplay(tabpanel->model()->fileInfo());
-    }
-    else
-    {
+    } else {
         enableActions(false);
         clearCursorInfo();
         clearInfoDisplay();
@@ -284,9 +282,7 @@ void HexnosisWindow::updateDataProcessor(QByteArray data)
         ulong longBytes;
         memcpy(&longBytes, bytes, sizeof(ulong));
         ui->int64Editor->setText(QString().setNum(longBytes));
-    }
-    else
-    {
+    } else {
         ui->int8Editor->setText(QString().setNum(data[0], 10));
         short shortBytes;
         memcpy(&shortBytes, bytes, sizeof(short));
@@ -594,9 +590,7 @@ void HexnosisWindow::on_int64Editor_editingFinished()
     {
         qlonglong value = text.toLongLong(&ok);
         p = &value;
-    }
-    else
-    {
+    } else {
         qulonglong value = text.toULongLong(&ok);
         p = &value;
     }
