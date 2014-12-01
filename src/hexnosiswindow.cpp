@@ -300,9 +300,7 @@ void HexnosisWindow::updateDataProcessor(QByteArray data)
         if (1 << i & data[0])
         {
             bitBytes.append("1");
-        }
-        else
-        {
+        } else {
             bitBytes.append("0");
         }
     }
@@ -344,7 +342,6 @@ void HexnosisWindow::updateInfoDisplay(QString info)
 void HexnosisWindow::clearInfoDisplay()
 {
     ui->infoDisplayTextBrowser->clear();
-
 }
 
 /**
